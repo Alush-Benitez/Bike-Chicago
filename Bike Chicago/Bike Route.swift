@@ -46,19 +46,34 @@ class BikeRoute: MKPolyline {
     
     init?(json: [Any]) {
         // 1
-        self.routeType = (json[0])["bikeroute"]
-        self.streetName = (json[11] as? String)!
-        self.startStreet = (json[12] as? String)!
-        self.endStreet = (json[13] as? String)!
-        self.lengthInFeet = (json[15] as? Double)!
-        
-        // 2
-        if let latitude = Double(json[14] as! String),
-            let longitude = Double(json[15] as! String) {
-            self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        } else {
-            self.coordinate = CLLocationCoordinate2D()
+//        self.routeType = json[0]["bikeroute"]
+//        self.streetName = (json[11] as? String)!
+//        self.startStreet = (json[12] as? String)!
+//        self.endStreet = (json[13] as? String)!
+//        self.lengthInFeet = (json[15] as? Double)!
+//
+//        // 2
+//        if let latitude = Double(json[14] as! String),
+//            let longitude = Double(json[15] as! String) {
+//            self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+//        } else {
+//            self.coordinate = CLLocationCoordinate2D()
+//        }
+    }
+    
+    func parse(json: JSON) {
+        for result in json.arrayValue {
+            self.routeType = result[0]["bikeroute"].stringValue
+            print(self.routeType)
+//            let name = result["name"].stringValue
+//            let description = result["description"].stringValue
+//            let source = ["id":id,"name":name,"description":description]
+//            sources.append(source)
         }
+//        DispatchQueue.main.async {
+//            [unowned self] in
+//            self.tableView.reloadData()
+//        }
     }
  
 
