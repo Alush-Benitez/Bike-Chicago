@@ -17,6 +17,7 @@ class BikeRoute: MKPolyline {
     var lengthInFeet = 0.0
     var coordinates: [Double] = []
     
+    /*
     init(routeType: String, streetName: String, startStreet: String, endStreet: String, lengthInFeet: Double){
         self.routeType = routeType
         self.streetName = streetName
@@ -27,5 +28,13 @@ class BikeRoute: MKPolyline {
     
     init?(json: [Any]) {
         self.routeType = json[bikeroute] as? String
+        self.streetName = json[
+    }
+    */
+    
+    func parse() {
+        for result in json[].arrayValue {
+            let routeType = result[]
+        }
     }
 }
