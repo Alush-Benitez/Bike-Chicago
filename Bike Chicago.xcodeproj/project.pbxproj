@@ -18,6 +18,7 @@
 		4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */; };
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
 		4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */; };
+		4AC2A5F020F9316100A94BB6 /* rows-2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EF20F9316100A94BB6 /* rows-2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike_ChicagoTests.swift; sourceTree = "<group>"; };
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bike Route.swift"; sourceTree = "<group>"; };
+		4AC2A5EF20F9316100A94BB6 /* rows-2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "rows-2.json"; path = "../../../../Downloads/rows-2.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
 				1457E7FD20F923E8008F6FE7 /* bikedata.json */,
+				4AC2A5EF20F9316100A94BB6 /* rows-2.json */,
 				14BAB28020F92E1C0060315F /* SwiftyJSON.swift */,
 			);
 			path = "Bike Chicago";
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */,
+				4AC2A5F020F9316100A94BB6 /* rows-2.json in Resources */,
 				4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */,
 				4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */,
 				4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */,

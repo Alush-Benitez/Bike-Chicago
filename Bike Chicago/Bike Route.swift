@@ -17,7 +17,7 @@ class BikeRoute: MKPolyline {
     var lengthInFeet = 0.0
     var coordinates: [Double] = []
     
-    /*
+    
     init(routeType: String, streetName: String, startStreet: String, endStreet: String, lengthInFeet: Double){
         self.routeType = routeType
         self.streetName = streetName
@@ -25,16 +25,41 @@ class BikeRoute: MKPolyline {
         self.endStreet = endStreet
         self.lengthInFeet = lengthInFeet
     }
-    
+    /*
     init?(json: [Any]) {
-        self.routeType = json[bikeroute] as? String
-        self.streetName = json[
-    }
-    */
-    
-    func parse() {
-        for result in json[].arrayValue {
-            let routeType = result[]
+        // 1
+        self.routeType = (json[8] as? String)!
+        self.streetName = (json[11] as? String)!
+        self.startStreet = (json[12] as? String)!
+        self.endStreet = (json[13] as? String)!
+        self.lengthInFeet = (json[15] as? Double)!
+
+        // 2
+        if let latitude = Double(json[14] as! String),
+            let longitude = Double(json[15] as! String) {
+            self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        } else {
+            self.coordinate = CLLocationCoordinate2D()
         }
     }
+ */
+    
+    init?(json: [Any]) {
+        // 1
+        self.routeType = (json[0])["bikeroute"]
+        self.streetName = (json[11] as? String)!
+        self.startStreet = (json[12] as? String)!
+        self.endStreet = (json[13] as? String)!
+        self.lengthInFeet = (json[15] as? Double)!
+        
+        // 2
+        if let latitude = Double(json[14] as! String),
+            let longitude = Double(json[15] as! String) {
+            self.coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        } else {
+            self.coordinate = CLLocationCoordinate2D()
+        }
+    }
+ 
+
 }

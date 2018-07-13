@@ -16,12 +16,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        loadInitialData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loadInitialData() {
+        // 1
+        guard let fileName = Bundle.main.path(forResource: "bikedata", ofType: "json")
+            else { return }
     }
 
 
