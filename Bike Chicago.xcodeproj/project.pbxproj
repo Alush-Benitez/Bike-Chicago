@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 1457E7FD20F923E8008F6FE7 /* bikedata.json */; };
+		14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB28020F92E1C0060315F /* SwiftyJSON.swift */; };
 		49C13E5420F9267100EECD90 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C13E5320F9267100EECD90 /* ContainerViewController.swift */; };
 		49C13E5620F926B700EECD90 /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C13E5520F926B700EECD90 /* SidePanelViewController.swift */; };
 		4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		1457E7FD20F923E8008F6FE7 /* bikedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bikedata.json; sourceTree = "<group>"; };
+		14BAB28020F92E1C0060315F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		49C13E5320F9267100EECD90 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		49C13E5520F926B700EECD90 /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
 		4AC2A5C720F90C5F00A94BB6 /* Bike Chicago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bike Chicago.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -64,12 +66,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14BAB27F20F929C30060315F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				49C13E5520F926B700EECD90 /* SidePanelViewController.swift */,
+				49C13E5320F9267100EECD90 /* ContainerViewController.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		4AC2A5BE20F90C5F00A94BB6 = {
 			isa = PBXGroup;
 			children = (
 				4AC2A5C920F90C5F00A94BB6 /* Bike Chicago */,
 				4AC2A5DE20F90C6200A94BB6 /* Bike ChicagoTests */,
 				4AC2A5C820F90C5F00A94BB6 /* Products */,
+				14BAB27F20F929C30060315F /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +105,7 @@
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
 				1457E7FD20F923E8008F6FE7 /* bikedata.json */,
+				14BAB28020F92E1C0060315F /* SwiftyJSON.swift */,
 			);
 			path = "Bike Chicago";
 			sourceTree = "<group>";
@@ -211,6 +224,7 @@
 				49C13E5620F926B700EECD90 /* SidePanelViewController.swift in Sources */,
 				4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */,
 				49C13E5420F9267100EECD90 /* ContainerViewController.swift in Sources */,
+				14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */,
 				4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */,
 				4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */,
 			);
