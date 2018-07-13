@@ -13,6 +13,7 @@
 		4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */; };
 		4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */; };
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
+		4AC2A5EB20F90D9F00A94BB6 /* rows-2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EA20F90D9E00A94BB6 /* rows-2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4AC2A5DB20F90C6200A94BB6 /* Bike ChicagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bike ChicagoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike_ChicagoTests.swift; sourceTree = "<group>"; };
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AC2A5EA20F90D9E00A94BB6 /* rows-2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "rows-2.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
+				4AC2A5EA20F90D9E00A94BB6 /* rows-2.json */,
 			);
 			path = "Bike Chicago";
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */,
+				4AC2A5EB20F90D9F00A94BB6 /* rows-2.json in Resources */,
 				4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */,
 				4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */,
 			);
