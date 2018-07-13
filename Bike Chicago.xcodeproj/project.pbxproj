@@ -14,6 +14,7 @@
 		4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */; };
 		4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */; };
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
+		4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		4AC2A5DB20F90C6200A94BB6 /* Bike ChicagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bike ChicagoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike_ChicagoTests.swift; sourceTree = "<group>"; };
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bike Route.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			children = (
 				4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */,
 				4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */,
+				4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */,
 				4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */,
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
@@ -203,6 +206,7 @@
 			files = (
 				4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */,
 				4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */,
+				4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
