@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 1457E7FD20F923E8008F6FE7 /* bikedata.json */; };
 		4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */; };
 		4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */; };
 		4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */; };
 		4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */; };
 		4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */; };
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
-		4AC2A5EB20F90D9F00A94BB6 /* rows-2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EA20F90D9E00A94BB6 /* rows-2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1457E7FD20F923E8008F6FE7 /* bikedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bikedata.json; sourceTree = "<group>"; };
 		4AC2A5C720F90C5F00A94BB6 /* Bike Chicago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bike Chicago.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,7 +38,6 @@
 		4AC2A5DB20F90C6200A94BB6 /* Bike ChicagoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bike ChicagoTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike_ChicagoTests.swift; sourceTree = "<group>"; };
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4AC2A5EA20F90D9E00A94BB6 /* rows-2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "rows-2.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,7 +85,7 @@
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
-				4AC2A5EA20F90D9E00A94BB6 /* rows-2.json */,
+				1457E7FD20F923E8008F6FE7 /* bikedata.json */,
 			);
 			path = "Bike Chicago";
 			sourceTree = "<group>";
@@ -180,8 +180,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */,
 				4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */,
-				4AC2A5EB20F90D9F00A94BB6 /* rows-2.json in Resources */,
 				4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */,
 				4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */,
 			);
