@@ -11,8 +11,6 @@
 		14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB28020F92E1C0060315F /* SwiftyJSON.swift */; };
 		492702F420F93852004313CE /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492702F320F93852004313CE /* ContainerViewController.swift */; };
 		492702F620F9387A004313CE /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492702F520F9387A004313CE /* SidePanelViewController.swift */; };
-		49C13E5420F9267100EECD90 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C13E5320F9267100EECD90 /* ContainerViewController.swift */; };
-		49C13E5620F926B700EECD90 /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C13E5520F926B700EECD90 /* SidePanelViewController.swift */; };
 		4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */; };
 		4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */; };
 		4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */; };
@@ -20,7 +18,6 @@
 		4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */; };
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
 		4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */; };
-		4AC2A5F020F9316100A94BB6 /* rows-2.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EF20F9316100A94BB6 /* rows-2.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +35,6 @@
 		14BAB28020F92E1C0060315F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		492702F320F93852004313CE /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		492702F520F9387A004313CE /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
-		49C13E5320F9267100EECD90 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
-		49C13E5520F926B700EECD90 /* SidePanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
 		4AC2A5C720F90C5F00A94BB6 /* Bike Chicago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bike Chicago.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,7 +46,6 @@
 		4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike_ChicagoTests.swift; sourceTree = "<group>"; };
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bike Route.swift"; sourceTree = "<group>"; };
-		4AC2A5EF20F9316100A94BB6 /* rows-2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "rows-2.json"; path = "../../../../Downloads/rows-2.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +69,6 @@
 		14BAB27F20F929C30060315F /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				49C13E5520F926B700EECD90 /* SidePanelViewController.swift */,
-				49C13E5320F9267100EECD90 /* ContainerViewController.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -105,15 +97,14 @@
 			children = (
 				4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */,
 				4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */,
-				4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */,
 				492702F320F93852004313CE /* ContainerViewController.swift */,
 				492702F520F9387A004313CE /* SidePanelViewController.swift */,
 				4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */,
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
+				4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
 				1457E7FD20F923E8008F6FE7 /* bikedata.json */,
-				4AC2A5EF20F9316100A94BB6 /* rows-2.json */,
 				14BAB28020F92E1C0060315F /* SwiftyJSON.swift */,
 			);
 			path = "Bike Chicago";
@@ -210,7 +201,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */,
-				4AC2A5F020F9316100A94BB6 /* rows-2.json in Resources */,
 				4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */,
 				4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */,
 				4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */,
@@ -231,10 +221,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49C13E5620F926B700EECD90 /* SidePanelViewController.swift in Sources */,
 				4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */,
 				492702F420F93852004313CE /* ContainerViewController.swift in Sources */,
-				49C13E5420F9267100EECD90 /* ContainerViewController.swift in Sources */,
 				492702F620F9387A004313CE /* SidePanelViewController.swift in Sources */,
 				14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */,
 				4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */,

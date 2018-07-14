@@ -14,22 +14,15 @@ class ViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     
+    let bikeRouteClass = BikeRoute()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadInitialData()
+        bikeRouteClass.readJson()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func loadInitialData() {
-        // 1
-        guard let fileName = Bundle.main.path(forResource: "bikedata", ofType: "json")
-            else { return }
-    }
-
-
 }
-
