@@ -14,11 +14,11 @@ class ViewController: UIViewController {
     
     @IBOutlet var mapView: MKMapView!
     
-    let bikeRouteClass = BikeRoute()
+    //let bikeRouteClass = BikeRoute()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bikeRouteClass.readJson()
+        let bikeRouteClass = BikeRoute()
     }
     
     override func didReceiveMemoryWarning() {
