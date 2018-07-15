@@ -19,6 +19,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let bikeRouteClass = BikeRoute()
+        print(bikeRouteClass.routeTypes.count)
+        print(bikeRouteClass.streetNames.count)
+        print(bikeRouteClass.endStreets.count)
+        print(bikeRouteClass.startStreets.count)
+        print(bikeRouteClass.lengths.count)
     }
     
     override func didReceiveMemoryWarning() {
