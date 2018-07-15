@@ -18,6 +18,7 @@
 		4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */; };
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
 		4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */; };
+		4AC2A5F320FBF31600A94BB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC2A5F220FBF31600A94BB6 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bike_ChicagoTests.swift; sourceTree = "<group>"; };
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bike Route.swift"; sourceTree = "<group>"; };
+		4AC2A5F220FBF31600A94BB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC2A5F320FBF31600A94BB6 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +83,7 @@
 				4AC2A5DE20F90C6200A94BB6 /* Bike ChicagoTests */,
 				4AC2A5C820F90C5F00A94BB6 /* Products */,
 				14BAB27F20F929C30060315F /* Recovered References */,
+				4AC2A5F120FBF31600A94BB6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,12 +100,12 @@
 			isa = PBXGroup;
 			children = (
 				4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */,
-				4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */,
 				492702F320F93852004313CE /* ContainerViewController.swift */,
 				492702F520F9387A004313CE /* SidePanelViewController.swift */,
 				4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */,
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
+				4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */,
 				4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
 				1457E7FD20F923E8008F6FE7 /* bikedata.json */,
@@ -117,6 +121,14 @@
 				4AC2A5E120F90C6200A94BB6 /* Info.plist */,
 			);
 			path = "Bike ChicagoTests";
+			sourceTree = "<group>";
+		};
+		4AC2A5F120FBF31600A94BB6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4AC2A5F220FBF31600A94BB6 /* MapKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +181,11 @@
 				TargetAttributes = {
 					4AC2A5C620F90C5F00A94BB6 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					4AC2A5DA20F90C6200A94BB6 = {
 						CreatedOnToolsVersion = 9.4.1;
