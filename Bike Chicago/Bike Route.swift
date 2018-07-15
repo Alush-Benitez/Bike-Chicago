@@ -15,6 +15,7 @@ class BikeRoute: MKPolyline {
     var startStreet = ""
     var endStreet = ""
     var lengthInFeet = 0.0
+    var pathCoordinates = [CLLocationCoordinate2D]()
     //var coordinates: [Double] = []
     var completeBikeData = [Dictionary<String, Any>]()
     
@@ -32,7 +33,7 @@ class BikeRoute: MKPolyline {
                 self.parse(json: json)
             }
         }
-        
+        print(self.pathCoordinates)
     }
     
     func parse(json: JSON) {
@@ -43,12 +44,28 @@ class BikeRoute: MKPolyline {
             //            let description = result["description"].stringValue
             //            let source = ["id":id,"name":name,"description":description]
             //            sources.append(source)
-            self.routeType = result[i]["bikeroute"].stringValue
-            self.streetName = result[i]["street"].stringValue
-            self.startStreet = result[i]["f_street"].stringValue
-            self.endStreet = result[i]["t_street"].stringValue
-            self.lengthInFeet = result[i]["shape_leng"].doubleValue
+            self.routeType = result["bikeroute"].stringValue
+            self.streetName = result["street"].stringValue
+            self.startStreet = result["f_street"].stringValue
+            self.endStreet = result["t_street"].stringValue
+            self.lengthInFeet = result["shape_leng"].doubleValue
+            
+            //let lat = result["the_geom"]["coordiates"][i][0].stringValue
+            var b = 0
+            //                if result["the_geom"]["coordinates"].count > i {
+            let lat = result["the_geom"]["coordinates"][b][0].stringValue
+            let long = result["the_geom"]["coordinates"][b][1].stringValue
+            var oneCoordinate = CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(long)!)
+            self.pathCoordinates.append(oneCoordinate)
+            print(self.pathCoordinates.count)
+            //                }
+            b += 1
+            //self.pathCoordinates = [CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(long)!)]
+            //print(self.pathCoordinates)
+            //self.pathCoordinates = CLLocationCoordinate2D(result[i]["the_geom"]["coordinates"].arrayValue)
+            var this = result[i]["the_geom"]["coordinates"][i]
             i += 1
+            //print(this)
         }
     }
     
