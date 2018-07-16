@@ -14,19 +14,18 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet var mapView: MKMapView!
     
+    
+    
     let regionRadius: CLLocationDistance = 10000
+    
+    var count = 0
     
     
     //let bikeRouteClass = BikeRoute()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let bikeRouteClass = BikeRoute()
-//        print(bikeRouteClass.routeTypes.count)
-//        print(bikeRouteClass.streetNames.count)
-//        print(bikeRouteClass.endStreets.count)
-//        print(bikeRouteClass.startStreets.count)
-//        print(bikeRouteClass.lengths.count)
+        mapView.delegate = self
         
         points.append(CLLocationCoordinate2DMake(35.3289, -120.7394))
         points.append(CLLocationCoordinate2DMake(35.3287, -120.7396))
@@ -38,7 +37,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         
         addRoute()
-        mapView.delegate = self
+        
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
         centerMapOnLocation(location: initialLocation)
         mapView.showsUserLocation = true
@@ -58,7 +57,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func addRoute() {
-        for polyline in polylines {
+        print("JKHHCYTFXZRERZSXTVGBJLNBJKBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBBJBJBJBJBJBJBJB")
+        print(BikeRoute().polylines.count)
+        for polyline in BikeRoute().polylines {
             mapView.add(polyline)
         }
     }
@@ -66,6 +67,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         print("blahj")
         if overlay is MKPolyline {
+            print("Inside yay")
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             polyLineRenderer.strokeColor = .blue
             polyLineRenderer.lineWidth = 2.0
