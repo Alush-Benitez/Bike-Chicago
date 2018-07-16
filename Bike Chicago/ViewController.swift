@@ -70,13 +70,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func parse(json: JSON?) {
         
         let maxNum = (json?.arrayValue.count)!
-        print(maxNum)
-        for i in 0..<maxNum {
-            self.addResults(result: (json?.arrayValue[i])!, i: i)
-        }
-        addRoutes(fromIndex: 0, toIndex: maxNum)
         
-        /*
         bikeRoutes = [BikeRoute](repeating: BikeRoute(), count: maxNum)
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -84,7 +78,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.async {
-                self.addRoutes(fromIndex: 0, toIndex: 120)
+                self.addRoutes()
                 print("section 1 Done")
             }
         }
@@ -93,7 +87,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.async {
-                self.addRoutes(fromIndex: 120, toIndex: 240)
+                self.addRoutes()
                 print("section 2 Done")
             }
         }
@@ -102,7 +96,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.async {
-                self.addRoutes(fromIndex: 240, toIndex: 360)
+                self.addRoutes()
                 print("section 3 Done")
             }
         }
@@ -111,7 +105,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.async {
-                self.addRoutes(fromIndex: 360, toIndex: 480 )
+                self.addRoutes()
                 print("section 4 Done")
             }
         }
@@ -121,11 +115,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 
             }
             DispatchQueue.main.async {
-                self.addRoutes(fromIndex: 480, toIndex: maxNum )
+                self.addRoutes()
                 print("section 5 Done")
             }
         }
-         */
+        
     }
     
     func addResults(result: JSON, i: Int){
@@ -152,9 +146,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let route = MKPolyline(coordinates: coords, count: coords.count)
         
-        //bikeRoutes.insert((BikeRoute(routeType: routeType, streetName: streetName, startStreet: startStreet, endStreet: endStreet, lengthInFeet: routeLength, route: route)), at: i)
+        bikeRoutes.insert((BikeRoute(routeType: routeType, streetName: streetName, startStreet: startStreet, endStreet: endStreet, lengthInFeet: routeLength, route: route)), at: i)
         
-        bikeRoutes.append((BikeRoute(routeType: routeType, streetName: streetName, startStreet: startStreet, endStreet: endStreet, lengthInFeet: routeLength, route: route)))
     }
     
     
@@ -165,13 +158,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.setRegion(coordinateRegion!, animated: true)
     }
     
-    func addRoutes(fromIndex: Int, toIndex: Int) {
+    func addRoutes() {
+        for overlay in mapView.overlays{
+            mapView.remove(overlay)
+        }
         for route in bikeRoutes {
             mapView.add(route.routeLine)
         }
-//        for i in fromIndex ..< toIndex {
-//            mapView.add(bikeRoutes[i].routeLine)
-//        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
