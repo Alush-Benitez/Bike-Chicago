@@ -57,10 +57,10 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func addRoute() {
-        print("JKHHCYTFXZRERZSXTVGBJLNBJKBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBJBBJBJBJBJBJBJBJB")
         print(BikeRoute().polylines.count)
         for polyline in BikeRoute().polylines {
             mapView.add(polyline)
+            print("Polyline: \(polyline.debugDescription)\n")
         }
     }
 

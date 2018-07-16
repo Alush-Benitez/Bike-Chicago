@@ -46,25 +46,29 @@ class BikeRoute: MKPolyline {
     
     func parse(json: JSON) {
         for result in json.arrayValue {
-            self.routeTypes.append(result["bikeroute"].stringValue)
-            self.streetNames.append(result["street"].stringValue)
-            self.startStreets.append(result["f_street"].stringValue)
-            self.endStreets.append(result["t_street"].stringValue)
-            self.lengths.append(result["shape_leng"].doubleValue)
-            
-            var b = 0
-            for _ in result["the_geom"]["coordinates"] {
-                let lat = result["the_geom"]["coordinates"][b][0].stringValue
-                let long = result["the_geom"]["coordinates"][b][1].stringValue
-                let oneCoordinate = CLLocationCoordinate2DMake(Double(lat)!, Double(long)!)
-                self.compiledPathCoordinates.append(oneCoordinate)
-                b += 1
-                if b == (result["the_geom"]["coordinates"].arrayValue).count {
-                    let myPolyline = MKPolyline.init(coordinates: compiledPathCoordinates, count: compiledPathCoordinates.count)
-                    polylines.append(myPolyline)
-                    compiledPathCoordinates.removeAll()
-                }
+            //if count < 1{
+                self.routeTypes.append(result["bikeroute"].stringValue)
+                self.streetNames.append(result["street"].stringValue)
+                self.startStreets.append(result["f_street"].stringValue)
+                self.endStreets.append(result["t_street"].stringValue)
+                self.lengths.append(result["shape_leng"].doubleValue)
+                
+                var b = 0
+                for _ in result["the_geom"]["coordinates"] {
+                    let lat = result["the_geom"]["coordinates"][b][0].stringValue
+                    let long = result["the_geom"]["coordinates"][b][1].stringValue
+                    let oneCoordinate = CLLocationCoordinate2DMake(Double(long)!, Double(lat)!)
+                    self.compiledPathCoordinates.append(oneCoordinate)
+                    b += 1
+                    if b == (result["the_geom"]["coordinates"].arrayValue).count {
+                        let myPolyline = MKPolyline.init(coordinates: compiledPathCoordinates, count: compiledPathCoordinates.count)
+                        polylines.append(myPolyline)
+                        compiledPathCoordinates.removeAll()
+                    }
+                //}
+                count += 1
             }
+            
         }
     }
     
