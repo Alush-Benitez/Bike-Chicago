@@ -10,7 +10,7 @@ import Foundation
 import MapKit
 
 
-var polylines: [MKPolyline] = []
+
 var points = [CLLocationCoordinate2D]()
 
 class BikeRoute: MKPolyline {
@@ -23,6 +23,10 @@ class BikeRoute: MKPolyline {
     var completeBikeData = [Dictionary<String, Any>]()
     var separatePathCoordinates = [[CLLocationCoordinate2D]]()
     var compiledPathCoordinates = [CLLocationCoordinate2D]()
+    
+    var polylines: [MKPolyline] = []
+    
+    var count = 0
     
     
     let query = "https://data.cityofchicago.org/resource/hvv9-38ut.json"
