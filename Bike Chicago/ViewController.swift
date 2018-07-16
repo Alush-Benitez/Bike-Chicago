@@ -16,24 +16,34 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     let regionRadius: CLLocationDistance = 10000
     
-    var polylines: [MKPolyline] = []
     
     //let bikeRouteClass = BikeRoute()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let bikeRouteClass = BikeRoute()
+        //let bikeRouteClass = BikeRoute()
 //        print(bikeRouteClass.routeTypes.count)
 //        print(bikeRouteClass.streetNames.count)
 //        print(bikeRouteClass.endStreets.count)
 //        print(bikeRouteClass.startStreets.count)
 //        print(bikeRouteClass.lengths.count)
         
+        points.append(CLLocationCoordinate2DMake(35.3289, -120.7394))
+        points.append(CLLocationCoordinate2DMake(35.3287, -120.7396))
+        points.append(CLLocationCoordinate2DMake(35.3284, -120.7392))
+        points.append(CLLocationCoordinate2DMake(35.3286, -120.7389))
+
+        let polyline = MKPolyline(coordinates: points, count: points.count)
+        mapView.add(polyline)
+        
+        
+        addRoute()
         mapView.delegate = self
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
         centerMapOnLocation(location: initialLocation)
         mapView.showsUserLocation = true
-        addRoute()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,24 +58,14 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func addRoute() {
-        for bunchOfCords in BikeRoute().separatePathCoordinates {
-            //print(bunchOfCords)
-            let myPolyline = MKPolyline(coordinates: bunchOfCords, count: bunchOfCords.count)
-            //mapView.add(myPolyline)
-            polylines.append(myPolyline)
-            self.mapView.add(myPolyline, level: MKOverlayLevel.aboveRoads)
+        for polyline in polylines {
+            mapView.add(polyline)
         }
     }
-    
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         print("blahj")
         if overlay is MKPolyline {
-//            let renderer = MKPolylineRenderer(overlay: overlay)
-//            renderer.strokeColor = UIColor.orange
-//            renderer.lineWidth = 3
-//            print("herefklhsadjfnkjfenm,badnklje")
-//            return renderer
-            
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             polyLineRenderer.strokeColor = .blue
             polyLineRenderer.lineWidth = 2.0

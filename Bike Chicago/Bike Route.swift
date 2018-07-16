@@ -10,6 +10,9 @@ import Foundation
 import MapKit
 
 
+var polylines: [MKPolyline] = []
+var points = [CLLocationCoordinate2D]()
+
 class BikeRoute: MKPolyline {
     //    var routeType = ""
     //    var streetName = ""
@@ -20,6 +23,7 @@ class BikeRoute: MKPolyline {
     var completeBikeData = [Dictionary<String, Any>]()
     var separatePathCoordinates = [[CLLocationCoordinate2D]]()
     var compiledPathCoordinates = [CLLocationCoordinate2D]()
+    
     
     let query = "https://data.cityofchicago.org/resource/hvv9-38ut.json"
     //    var cdn = [Array<Any>]()
@@ -48,20 +52,15 @@ class BikeRoute: MKPolyline {
             for _ in result["the_geom"]["coordinates"] {
                 let lat = result["the_geom"]["coordinates"][b][0].stringValue
                 let long = result["the_geom"]["coordinates"][b][1].stringValue
-                let oneCoordinate = CLLocationCoordinate2D(latitude: Double(lat)!, longitude: Double(long)!)
+                let oneCoordinate = CLLocationCoordinate2DMake(Double(lat)!, Double(long)!)
                 self.compiledPathCoordinates.append(oneCoordinate)
                 b += 1
                 if b == (result["the_geom"]["coordinates"].arrayValue).count {
-                    self.separatePathCoordinates.append(compiledPathCoordinates)
+                    let myPolyline = MKPolyline.init(coordinates: compiledPathCoordinates, count: compiledPathCoordinates.count)
+                    polylines.append(myPolyline)
                     compiledPathCoordinates.removeAll()
                 }
             }
-            
-                            //ABOVE COMMENTED-OUT SECTION LOADS ALL COORDINATES, TAKES 1.5 MINUTES TO LOAD.
-                            //IT IS COMMENTED OUT FOR TESTING OTHER THINGS.
-            
-            //print(self.separatePathCoordinates.count)
-            
         }
     }
     
@@ -72,6 +71,19 @@ class BikeRoute: MKPolyline {
                 self.parse(json: json)
             }
         }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        print("blahj")
+        if overlay is MKPolyline {
+            
+            let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
+            polyLineRenderer.strokeColor = .blue
+            polyLineRenderer.lineWidth = 2.0
+            
+            return polyLineRenderer
+        }
+        return MKPolylineRenderer()
     }
 }
 
