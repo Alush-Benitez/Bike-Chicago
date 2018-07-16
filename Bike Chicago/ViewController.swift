@@ -15,25 +15,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
-    
     let regionRadius: CLLocationDistance = 20000
+    var locValue: CLLocationCoordinate2D? = nil
+    var coordinateRegion: MKCoordinateRegion? = nil
+    var search2 = ""
     
     var bikeRoutes = [BikeRoute]()
-    var count = 0
     
-    var routeType = ""
-    var streetName = ""
-    var startStreet = ""
-    var endStreet = ""
-    var lengthInFeet = 0.0
-    
-    var locValue: CLLocationCoordinate2D? = nil
-    
-    var search2 = ""
-    var coordinateRegion: MKCoordinateRegion? = nil
-    
-    
-    //let bikeRouteClass = BikeRoute()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,8 +30,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.delegate = self
         
         //DispatchQueue.global(qos: .userInitiated).async {
-            //[unowned self] in
-            //self.addRoute()
+        //[unowned self] in
+        //self.addRoute()
         //}
         
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
@@ -55,15 +43,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
             locationManager.startUpdatingLocation()
         }
-        
-        
+        grabData()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             locValue = location.coordinate
         }
-        grabData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -81,48 +67,68 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    let group = DispatchGroup()
-    
-    
     func parse(json: JSON?) {
-        DispatchQueue.main.async {
+        
+        let maxNum = (json?.arrayValue.count)!
+        print(maxNum)
+        for i in 0..<maxNum {
+            self.addResults(result: (json?.arrayValue[i])!, i: i)
+        }
+        addRoutes(fromIndex: 0, toIndex: maxNum)
+        
+        /*
+        bikeRoutes = [BikeRoute](repeating: BikeRoute(), count: maxNum)
+        
+        DispatchQueue.global(qos: .userInteractive).async {
             for i in 0..<120 {
-                self.addResults(result: (json?.arrayValue[i])!)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            self.addRoutes()
+            DispatchQueue.main.async {
+                self.addRoutes(fromIndex: 0, toIndex: 120)
+                print("section 1 Done")
+            }
         }
-        DispatchQueue.main.async {
-            
+        DispatchQueue.global(qos: .userInteractive).async {
             for i in 120..<240 {
-                self.addResults(result: (json?.arrayValue[i])!)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            self.addRoutes()
+            DispatchQueue.main.async {
+                self.addRoutes(fromIndex: 120, toIndex: 240)
+                print("section 2 Done")
+            }
         }
-        DispatchQueue.main.async {
-            
+        DispatchQueue.global(qos: .userInteractive).async {
             for i in 240..<360 {
-                self.addResults(result: (json?.arrayValue[i])!)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            self.addRoutes()
+            DispatchQueue.main.async {
+                self.addRoutes(fromIndex: 240, toIndex: 360)
+                print("section 3 Done")
+            }
         }
-        DispatchQueue.main.async {
-            
+        DispatchQueue.global(qos: .userInteractive).async {
             for i in 360..<480 {
-                self.addResults(result: (json?.arrayValue[i])!)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            self.addRoutes()
-        }
-        DispatchQueue.main.async {
-            
-            for i in 480..<(json?.arrayValue.count)! {
-                self.addResults(result: (json?.arrayValue[i])!)
+            DispatchQueue.main.async {
+                self.addRoutes(fromIndex: 360, toIndex: 480 )
+                print("section 4 Done")
             }
-            self.addRoutes()
         }
+        DispatchQueue.global(qos: .userInteractive).async {
+            for i in 480..<maxNum {
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
+                
+            }
+            DispatchQueue.main.async {
+                self.addRoutes(fromIndex: 480, toIndex: maxNum )
+                print("section 5 Done")
+            }
+        }
+         */
     }
     
-    
-    func addResults(result: JSON){
+    func addResults(result: JSON, i: Int){
         
         var routeType = ""
         var streetName = ""
@@ -140,32 +146,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let coordPairs = ((result["the_geom"])["coordinates"].arrayValue)
         
         for coordPair in coordPairs {
-            print(" INDEX 1\(Double(coordPair[1].stringValue)!)")
-            print(" INDEX 0\(Double(coordPair[0].stringValue)!)")
             let coord = CLLocationCoordinate2DMake(Double(coordPair[1].stringValue)!, Double(coordPair[0].stringValue)!)
             coords.append(coord)
-            
         }
         
         let route = MKPolyline(coordinates: coords, count: coords.count)
         
-        bikeRoutes.append(BikeRoute(routeType: routeType, streetName: streetName, startStreet: startStreet, endStreet: endStreet, lengthInFeet: routeLength, route: route))
+        //bikeRoutes.insert((BikeRoute(routeType: routeType, streetName: streetName, startStreet: startStreet, endStreet: endStreet, lengthInFeet: routeLength, route: route)), at: i)
+        
+        bikeRoutes.append((BikeRoute(routeType: routeType, streetName: streetName, startStreet: startStreet, endStreet: endStreet, lengthInFeet: routeLength, route: route)))
     }
     
     
     
     func centerMapOnLocation(location: CLLocation) {
         coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-                                                                  regionRadius, regionRadius)
+                                                              regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion!, animated: true)
     }
     
-    func addRoutes() {
-        mapView.removeOverlays(mapView.overlays)
+    func addRoutes(fromIndex: Int, toIndex: Int) {
         for route in bikeRoutes {
-            print(route.routeLine.debugDescription)
             mapView.add(route.routeLine)
         }
+//        for i in fromIndex ..< toIndex {
+//            mapView.add(bikeRoutes[i].routeLine)
+//        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -174,18 +180,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             polyLineRenderer.lineWidth = 1.0
             polyLineRenderer.strokeColor = .blue
             /*
-            if routeType == "Cycle Track" {
-                polyLineRenderer.strokeColor = .red
-            } else if routeType == "Bike Lane" {
-                polyLineRenderer.strokeColor = .blue
-            } else if routeType == "Buffered Bike Lane" {
-                polyLineRenderer.strokeColor = .green
-            } else if routeType == "Shared-Lane" {
-                polyLineRenderer.strokeColor = .black
-            } else {
-                polyLineRenderer.strokeColor = .orange
-            }
- */
+             if routeType == "Cycle Track" {
+             polyLineRenderer.strokeColor = .red
+             } else if routeType == "Bike Lane" {
+             polyLineRenderer.strokeColor = .blue
+             } else if routeType == "Buffered Bike Lane" {
+             polyLineRenderer.strokeColor = .green
+             } else if routeType == "Shared-Lane" {
+             polyLineRenderer.strokeColor = .black
+             } else {
+             polyLineRenderer.strokeColor = .orange
+             }
+             */
             
             return polyLineRenderer
         }

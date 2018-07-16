@@ -30,6 +30,16 @@ class BikeRoute: MKPolyline {
         self.routeLine = route
     }
     
+    override init() {
+        super.init()
+        self.routeType = ""
+        self.streetName = ""
+        self.startStreet = ""
+        self.endStreet = ""
+        self.lengthInFeet = 0
+        self.routeLine = MKPolyline()
+    }
+    
     
 }
 
