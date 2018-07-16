@@ -14,7 +14,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet var mapView: MKMapView!
     
-    let regionRadius: CLLocationDistance = 10000
+    let locationManager = CLLocationManager()
+    
+    let regionRadius: CLLocationDistance = 20000
+    
     var bikeRoutes = [BikeRoute]()
     var count = 0
     
@@ -37,17 +40,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         mapView.delegate = self
+        
+        //DispatchQueue.global(qos: .userInitiated).async {
+            //[unowned self] in
+            //self.addRoute()
+        //}
+        
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
         centerMapOnLocation(location: initialLocation)
         mapView.showsUserLocation = true
         
-        grabData()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
+            locationManager.startUpdatingLocation()
+        }
+        
+        
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             locValue = location.coordinate
         }
+        grabData()
     }
     
     override func didReceiveMemoryWarning() {
