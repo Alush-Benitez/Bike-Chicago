@@ -50,26 +50,40 @@ class ViewController: UIViewController, MKMapViewDelegate {
     
     
     func parse(json: JSON?) {
-        for i in 0..<120 {
-            addResults(result: (json?.arrayValue[i])!)
+        DispatchQueue.main.async {
+            for i in 0..<120 {
+                self.addResults(result: (json?.arrayValue[i])!)
+            }
+            self.addRoutes()
         }
-        
-        for i in 120..<240 {
-            addResults(result: (json?.arrayValue[i])!)
+        DispatchQueue.main.async {
+            
+            for i in 120..<240 {
+                self.addResults(result: (json?.arrayValue[i])!)
+            }
+            self.addRoutes()
         }
-        
-        for i in 240..<360 {
-            addResults(result: (json?.arrayValue[i])!)
+        DispatchQueue.main.async {
+            
+            for i in 240..<360 {
+                self.addResults(result: (json?.arrayValue[i])!)
+            }
+            self.addRoutes()
         }
-        
-        for i in 360..<480 {
-            addResults(result: (json?.arrayValue[i])!)
+        DispatchQueue.main.async {
+            
+            for i in 360..<480 {
+                self.addResults(result: (json?.arrayValue[i])!)
+            }
+            self.addRoutes()
         }
-        
-        for i in 480..<(json?.arrayValue.count)! {
-            addResults(result: (json?.arrayValue[i])!)
+        DispatchQueue.main.async {
+            
+            for i in 480..<(json?.arrayValue.count)! {
+                self.addResults(result: (json?.arrayValue[i])!)
+            }
+            self.addRoutes()
         }
-        addRoutes()
     }
     
     
@@ -112,6 +126,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func addRoutes() {
+        mapView.removeOverlays(mapView.overlays)
         for route in bikeRoutes {
             print(route.routeLine.debugDescription)
             mapView.add(route.routeLine)
