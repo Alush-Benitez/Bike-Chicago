@@ -28,6 +28,8 @@ class BikeRoute: MKPolyline {
     
     var count = 0
     
+    let defaults = UserDefaults.standard
+    
     
     let query = "https://data.cityofchicago.org/resource/hvv9-38ut.json"
     //    var cdn = [Array<Any>]()
@@ -46,27 +48,24 @@ class BikeRoute: MKPolyline {
     
     func parse(json: JSON) {
         for result in json.arrayValue {
-            //if count < 1{
-                self.routeTypes.append(result["bikeroute"].stringValue)
-                self.streetNames.append(result["street"].stringValue)
-                self.startStreets.append(result["f_street"].stringValue)
-                self.endStreets.append(result["t_street"].stringValue)
-                self.lengths.append(result["shape_leng"].doubleValue)
-                
-                var b = 0
-                for _ in result["the_geom"]["coordinates"] {
-                    let lat = result["the_geom"]["coordinates"][b][0].stringValue
-                    let long = result["the_geom"]["coordinates"][b][1].stringValue
-                    let oneCoordinate = CLLocationCoordinate2DMake(Double(long)!, Double(lat)!)
-                    self.compiledPathCoordinates.append(oneCoordinate)
-                    b += 1
-                    if b == (result["the_geom"]["coordinates"].arrayValue).count {
-                        let myPolyline = MKPolyline.init(coordinates: compiledPathCoordinates, count: compiledPathCoordinates.count)
-                        polylines.append(myPolyline)
-                        compiledPathCoordinates.removeAll()
-                    }
-                //}
-                count += 1
+            self.routeTypes.append(result["bikeroute"].stringValue)
+            self.streetNames.append(result["street"].stringValue)
+            self.startStreets.append(result["f_street"].stringValue)
+            self.endStreets.append(result["t_street"].stringValue)
+            self.lengths.append(result["shape_leng"].doubleValue)
+            
+            var b = 0
+            for _ in result["the_geom"]["coordinates"] {
+                let lat = result["the_geom"]["coordinates"][b][0].stringValue
+                let long = result["the_geom"]["coordinates"][b][1].stringValue
+                let oneCoordinate = CLLocationCoordinate2DMake(Double(long)!, Double(lat)!)
+                self.compiledPathCoordinates.append(oneCoordinate)
+                b += 1
+                if b == (result["the_geom"]["coordinates"].arrayValue).count {
+                    let myPolyline = MKPolyline.init(coordinates: compiledPathCoordinates, count: compiledPathCoordinates.count)
+                    polylines.append(myPolyline)
+                    compiledPathCoordinates.removeAll()
+                }
             }
             
         }
@@ -79,20 +78,7 @@ class BikeRoute: MKPolyline {
                 self.parse(json: json)
             }
         }
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        print("blahj")
-        if overlay is MKPolyline {
-            
-            let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
-            polyLineRenderer.strokeColor = .blue
-            polyLineRenderer.lineWidth = 2.0
-            
-            return polyLineRenderer
-        }
-        return MKPolylineRenderer()
-    }
+    }    
 }
 
 
