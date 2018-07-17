@@ -12,27 +12,47 @@ import CoreLocation
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
-    @IBOutlet var mapView: MKMapView!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var infoView: UIView!
+    @IBOutlet weak var streetLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var startStreetLabel: UILabel!
+    @IBOutlet weak var endStreetLabel: UILabel!
+    @IBOutlet weak var directionsButton: UIButton!
     
+    
+    @IBOutlet weak var smallView: UIView!
+    @IBOutlet weak var etaBike: UILabel!
+    @IBOutlet weak var etaWalk: UILabel!
+    @IBOutlet weak var distanceSmallView: UILabel!
+    
+    
+    
+    var selectedMapItem = MKMapItem()
+    var mapItems = [MKMapItem]()
     let locationManager = CLLocationManager()
     let regionRadius: CLLocationDistance = 20000
     var locValue: CLLocationCoordinate2D? = nil
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
     
+    var selectedLong = 0.0
+    var selectedLat = 0.0
+    
     var bikeRoutes = [BikeRoute]()
     
+    var milesAndETA = [Double]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         mapView.delegate = self
+        infoView.alpha = 0
+        directionsButton.layer.cornerRadius = 20
+        smallView.alpha = 0
+        smallView.layer.cornerRadius = 10
         
-        //DispatchQueue.global(qos: .userInitiated).async {
-        //[unowned self] in
-        //self.addRoute()
-        //}
         
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
         centerMapOnLocation(location: initialLocation)
@@ -167,24 +187,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             polyLineRenderer.lineWidth = 1.0
             polyLineRenderer.strokeColor = .blue
+            
             /*
-             if routeType == "Cycle Track" {
+             if overlay.routeType == "Cycle Track" {
              polyLineRenderer.strokeColor = .red
-             } else if routeType == "Bike Lane" {
+             } else if overlay.routeType == "Bike Lane" {
              polyLineRenderer.strokeColor = .blue
-             } else if routeType == "Buffered Bike Lane" {
+             } else if overlay.routeType == "Buffered Bike Lane" {
              polyLineRenderer.strokeColor = .green
-             } else if routeType == "Shared-Lane" {
+             } else if overlay.routeType == "Shared-Lane" {
              polyLineRenderer.strokeColor = .black
              } else {
              polyLineRenderer.strokeColor = .orange
              }
-             */
+ */
             
             return polyLineRenderer
         }
@@ -230,9 +252,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         annotation.coordinate = mapItem.placemark.coordinate
                         annotation.title = mapItem.name
                         self.mapView.addAnnotation(annotation)
-                        self.getDirections()
+                        self.mapItems.append(mapItem)
                     }
                 }
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        for mapItem in mapItems {
+            if mapItem.placemark.coordinate.latitude == view.annotation?.coordinate.latitude &&
+                mapItem.placemark.coordinate.longitude == view.annotation?.coordinate.longitude {
+                selectedMapItem = mapItem
+                selectedLat = mapItem.placemark.coordinate.latitude
+                selectedLong = mapItem.placemark.coordinate.longitude
             }
         }
     }
@@ -255,35 +288,73 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return markerView
     }
     
-    func mapViewDidFinishLoadingMap(_ mapView: MKMapView) {
-        loadOptions()
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+//        var etaAndMiles = getDirections(lat: selectedLat, long: selectedLong, showPolyline: false)
+//        let miles = String(etaAndMiles[0])
+//        let eta = String(etaAndMiles[1])
+        
+        infoView.layer.cornerRadius = 20
+        streetLabel.text = selectedMapItem.name!
+        startStreetLabel.text = ""
+        endStreetLabel.text = ""
+        //distanceLabel.text = miles
+        //directionsButton.setTitle("Directions - \(eta)", for: .normal)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 0.95
+        }
+        
     }
-    
     
     @IBAction func searchTapped(_ sender: Any) {
         displayMesage(message: "Search for a place")
     }
     
-    func getDirections() {
-        
-        let request = MKDirectionsRequest()
-        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: (locValue?.latitude)!, longitude: (locValue?.longitude)!), addressDictionary: nil))
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 37.783333, longitude: -122.416667), addressDictionary: nil))
-        request.requestsAlternateRoutes = true
-        request.transportType = .automobile
-        
-        let directions = MKDirections(request: request)
-        
-        directions.calculate { [unowned self] response, error in
-            guard let unwrappedResponse = response else { return }
-            
-            for route in unwrappedResponse.routes {
-                self.mapView.add(route.polyline)
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-            }
+    
+    @IBAction func tappedAway(_ sender: UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 0
+        }
+    }
+    
+    @IBAction func directionsTapped(_ sender: Any) {
+        getDirections(lat: selectedLat, long: selectedLong, showPolyline: true)
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 0
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.smallView.alpha = 0.9
         }
     }
     
     
-    
+    func getDirections(lat: Double, long: Double, showPolyline: Bool) {
+        
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: (locValue?.latitude)!, longitude: (locValue?.longitude)!), addressDictionary: nil))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), addressDictionary: nil))
+        request.requestsAlternateRoutes = false
+        request.transportType = .walking
+        
+        print(lat)
+        print(long)
+        
+        print(request)
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { [unowned self] response, error in
+            let unwrappedResponse = response
+            for route in (unwrappedResponse?.routes)! {
+                //if showPolyline {
+                self.mapView.add(route.polyline)
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                //}
+                print("here")
+                self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
+                self.etaBike.text = "\(String(format: "%.1f", (route.expectedTravelTime / 4.0) / 60)) min"
+                self.etaWalk.text = "\(String(format: "%.1f", route.expectedTravelTime / 60.0)) min"
+            }
+        }
+    }
 }
