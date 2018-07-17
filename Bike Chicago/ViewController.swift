@@ -12,6 +12,14 @@ import CoreLocation
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
+    @IBOutlet var leadingC: NSLayoutConstraint!
+    @IBOutlet var trailingC: NSLayoutConstraint!
+    
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var hamburgerView: UIView!
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var streetLabel: UILabel!
@@ -35,6 +43,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var locValue: CLLocationCoordinate2D? = nil
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
+    
+    var hamburgerIsVisible = false
     
     var selectedLong = 0.0
     var selectedLat = 0.0
@@ -338,7 +348,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBAction func onSharedTapped(_ sender: Any) {
     }
+    @IBAction func onHamburgerTapped(_ sender: Any) {
+        //if the hamburger menu is NOT visible, then move the ubeView back to where it used to be
+        if !hamburgerIsVisible {
+            leadingConstraint.constant = -150
+            //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
+            //trailingC.constant = -150
+            
+            //1
+            hamburgerIsVisible = true
+        } else {
+            //if the hamburger menu IS visible, then move the ubeView back to its original position
+            leadingConstraint.constant = 0
+            //trailingC.constant = 0
+            
+            //2
+            hamburgerIsVisible = false
+        }
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
+            self.view.layoutIfNeeded()
+        }) { (animationComplete) in
+            print("The animation is complete!")
+        }
+    }
     
+    @IBOutlet weak var onHamburgerTapped: UIBarButtonItem!
     func getDirections(lat: Double, long: Double, showPolyline: Bool) {
         
         let request = MKDirectionsRequest()
