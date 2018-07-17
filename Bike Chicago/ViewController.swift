@@ -327,6 +327,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    @IBAction func onOffRoadTapped(_ sender: Any) {
+    }
+    
+    @IBAction func onBufferedTapped(_ sender: Any) {
+    }
+    
+    @IBAction func onNormalTapped(_ sender: Any) {
+    }
+    
+    @IBAction func onSharedTapped(_ sender: Any) {
+    }
     
     func getDirections(lat: Double, long: Double, showPolyline: Bool) {
         
