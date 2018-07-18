@@ -613,7 +613,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
                 showInfoWhenLaneTapped(line: nearestPoly!)
-                
+                makeBold(routeToBold: nearestPoly!)
             }
         }
     }
