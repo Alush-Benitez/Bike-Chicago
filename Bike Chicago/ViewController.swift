@@ -23,6 +23,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var startStreetLabel: UILabel!
     @IBOutlet weak var endStreetLabel: UILabel!
     @IBOutlet weak var directionsButton: UIButton!
+    @IBOutlet weak var toLabel: UILabel!
     
     @IBOutlet weak var offRoadOutlet: UIButton!
     @IBOutlet weak var bufferedOutlet: UIButton!
@@ -78,7 +79,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         locationManager.delegate = self
         mapView.delegate = self
         infoView.alpha = 0
-        directionsButton.layer.cornerRadius = 20
+        directionsButton.layer.cornerRadius = 10
         smallView.alpha = 0
         smallView.layer.cornerRadius = 10
         goButton.layer.cornerRadius = 10
@@ -385,6 +386,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         infoView.layer.cornerRadius = 20
         directionsButton.isHidden = false
+        toLabel.isHidden = true
         distanceLabel.isHidden = true
         streetLabel.text = selectedMapItem.name!
         startStreetLabel.text = ""
@@ -543,7 +545,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
-                self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60) / 60)) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
+                self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60 / 60))) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
                 self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60) / 60)) hr \(String(Int(route.expectedTravelTime) % 60)) min"
             }
         }
@@ -679,6 +681,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         distanceLabel.isHidden = false
         directionsButton.isHidden = true
+        toLabel.isHidden = true
         for route in bikeRoutes {
             if route.routeLine == line {
                 //if route.streetName.first != String {
