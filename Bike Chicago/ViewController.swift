@@ -416,13 +416,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func directionsTapped(_ sender: Any) {
         getDirections(lat: selectedLat, long: selectedLong, showPolyline: true)
         
+        var count = 0
         
         for bikeRack in bikeRacks {
-            var temp = [BikeRack]()
-            if bikeRack.coordinate.latitude > selectedLat - 0.005 && bikeRack.coordinate.latitude < selectedLat + 0.005 {
-                if bikeRack.coordinate.longitude > selectedLong - 0.005 && bikeRack.coordinate.longitude < selectedLong + 0.005 {
-                    temp.append(bikeRack)
-                    mapView.addAnnotations(temp)
+            if count <= 3 {
+                var temp = [BikeRack]()
+                if bikeRack.coordinate.latitude > selectedLat - 0.002 && bikeRack.coordinate.latitude < selectedLat + 0.002 {
+                    if bikeRack.coordinate.longitude > selectedLong - 0.002 && bikeRack.coordinate.longitude < selectedLong + 0.0002 {
+                        temp.append(bikeRack)
+                        mapView.addAnnotations(temp)
+                        count += 1
+                    }
                 }
             }
         }
