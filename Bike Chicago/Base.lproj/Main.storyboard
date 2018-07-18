@@ -238,6 +238,9 @@
                                 <state key="normal" title="Go">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="goButtonTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="ATh-vC-WzW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAq-U8-wnw">
                                 <rect key="frame" x="292" y="305" width="113" height="30"/>
@@ -247,6 +250,9 @@
                                     <constraint firstAttribute="width" constant="113" id="sPe-QX-GS0"/>
                                 </constraints>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelButtonTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="dEm-ic-iX1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -295,6 +301,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bufferedOutlet" destination="WIL-Mr-Pww" id="x3a-5k-MV4"/>
+                        <outlet property="cancelButton" destination="SAq-U8-wnw" id="bTZ-9V-i5E"/>
                         <outlet property="cycleTrackOutlet" destination="InB-9H-EZb" id="wf7-Jf-cYk"/>
                         <outlet property="directionsButton" destination="sDd-1q-LgV" id="LvQ-zI-CfN"/>
                         <outlet property="distanceLabel" destination="YRA-6i-mTB" id="zRs-iN-nbs"/>
@@ -302,6 +309,7 @@
                         <outlet property="endStreetLabel" destination="qak-j3-Ef8" id="iX7-VY-d77"/>
                         <outlet property="etaBike" destination="kLU-N3-sXC" id="1Jk-td-Tp3"/>
                         <outlet property="etaWalk" destination="K9R-Q6-Xgj" id="w07-n7-xXw"/>
+                        <outlet property="goButton" destination="8Ey-L8-ImJ" id="GAn-tr-f9O"/>
                         <outlet property="hamburgerView" destination="1uR-8Z-UVu" id="cjo-kp-oXI"/>
                         <outlet property="infoView" destination="h0C-dG-ZpU" id="WFQ-7M-jJ1"/>
                         <outlet property="leadingConstraint" destination="N1z-s6-rOo" id="hAu-lA-SZu"/>
