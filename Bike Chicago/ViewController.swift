@@ -47,6 +47,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var selectedPathTypes = [1,1,1,1,1]
     //
     
+    //let map = MKMapView()
+    //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+    
     var hamburgerIsVisible = true
     
     var selectedLong = 0.0
@@ -58,6 +61,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+        mapView.addGestureRecognizer(mapTap)
+        
         hamburgerView.layer.cornerRadius = 20;
         hamburgerView.layer.masksToBounds = true;
         hamburgerView.alpha = 0.0
