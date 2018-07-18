@@ -260,15 +260,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
                     polyLineRenderer.lineWidth = 1.5
                     if route.routeType == "CYCLE TRACK" {
-                        polyLineRenderer.strokeColor = .red
+                        polyLineRenderer.strokeColor = UIColor(red: 1.0, green: 59/255.0, blue: 61/255.0, alpha: 1)
                     } else if route.routeType == "BIKE LANE" {
-                        polyLineRenderer.strokeColor = .blue
+                        polyLineRenderer.strokeColor = UIColor(red: 13/255.0, green: 174/255.0, blue: 230/255.0, alpha: 1)
                     } else if route.routeType == "BUFFERED BIKE LANE" {
-                        polyLineRenderer.strokeColor = .green
+                        polyLineRenderer.strokeColor = UIColor(red: 134/255.0, green: 76/255.0, blue: 188/255.0, alpha: 1)
                     } else if route.routeType == "SHARED-LANE" {
-                        polyLineRenderer.strokeColor = .purple
+                        polyLineRenderer.strokeColor = UIColor(red: 25/255.0, green: 178/255.0, blue: 54/255.0, alpha: 1)
                     } else { // offroad
-                        polyLineRenderer.strokeColor = .orange
+                        polyLineRenderer.strokeColor = UIColor(red: 162/255.0, green: 99/255.0, blue: 81/255.0, alpha: 1)
                     }
                     
                     if route.isBold{
@@ -362,16 +362,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        //        var etaAndMiles = getDirections(lat: selectedLat, long: selectedLong, showPolyline: false)
-        //        let miles = String(etaAndMiles[0])
-        //        let eta = String(etaAndMiles[1])
-        
         infoView.layer.cornerRadius = 20
         streetLabel.text = selectedMapItem.name!
         startStreetLabel.text = ""
         endStreetLabel.text = ""
-        //distanceLabel.text = miles
-        //directionsButton.setTitle("Directions - \(eta)", for: .normal)
         
         UIView.animate(withDuration: 0.3) {
             self.infoView.alpha = 0.95
