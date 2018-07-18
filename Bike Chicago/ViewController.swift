@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var hamburgerView: UIView!
@@ -29,6 +29,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var bufferedOutlet: UIButton!
     @IBOutlet weak var normalButtonOutlet: UIButton!
     @IBOutlet weak var sharedLaneOutlet: UIButton!
+    @IBOutlet weak var cycleTrackOutlet: UIButton!
     
     @IBOutlet weak var smallView: UIView!
     @IBOutlet weak var etaBike: UILabel!
@@ -229,7 +230,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
              } else {
              polyLineRenderer.strokeColor = .orange
              }
- */
+             */
             
             return polyLineRenderer
         }
@@ -312,9 +313,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//        var etaAndMiles = getDirections(lat: selectedLat, long: selectedLong, showPolyline: false)
-//        let miles = String(etaAndMiles[0])
-//        let eta = String(etaAndMiles[1])
+        //        var etaAndMiles = getDirections(lat: selectedLat, long: selectedLong, showPolyline: false)
+        //        let miles = String(etaAndMiles[0])
+        //        let eta = String(etaAndMiles[1])
         
         infoView.layer.cornerRadius = 20
         streetLabel.text = selectedMapItem.name!
@@ -354,6 +355,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         selectedPathType = "OFF-STREET TRAIL"
         changeHamburgerButtonAlpha()
         offRoadOutlet.alpha = 1.0
+        print()
         //grabData()
     }
     
@@ -368,7 +370,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         selectedPathType = "BIKE LANE"
         changeHamburgerButtonAlpha()
         normalButtonOutlet.alpha = 1.0
-       //grabData()
+        //grabData()
     }
     
     @IBAction func onSharedTapped(_ sender: Any) {
@@ -378,6 +380,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         //grabData()
         
     }
+    @IBAction func onCycleTrackTapped(_ sender: Any) {
+        selectedPathType = "CYCLE TRACK"
+        changeHamburgerButtonAlpha()
+        cycleTrackOutlet.alpha = 1.0
+        //grabData()
+    }
+    
     @IBAction func onHamburgerTapped(_ sender: Any) {
         //if the hamburger menu is NOT visible, then move the ubeView back to where it used to be
         if !hamburgerIsVisible {
@@ -400,7 +409,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }) { (animationComplete) in
         }
     }
-
+    
     func getDirections(lat: Double, long: Double, showPolyline: Bool) {
         
         let request = MKDirectionsRequest()
@@ -444,30 +453,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         bufferedOutlet.alpha = 0.5
         normalButtonOutlet.alpha = 0.5
         offRoadOutlet.alpha = 0.5
+        cycleTrackOutlet.alpha = 0.5
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -164,28 +164,28 @@
                                 <rect key="frame" x="0.0" y="64" width="159" height="323"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIL-Mr-Pww">
-                                        <rect key="frame" x="31" y="139" width="97" height="30"/>
+                                        <rect key="frame" x="31" y="116" width="97" height="30"/>
                                         <state key="normal" title="Buffered Lane"/>
                                         <connections>
                                             <action selector="onBufferedTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="8Ht-BC-9uf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7L-fA-nuc">
-                                        <rect key="frame" x="54" y="190" width="50" height="30"/>
+                                        <rect key="frame" x="54" y="162" width="50" height="30"/>
                                         <state key="normal" title="Normal"/>
                                         <connections>
                                             <action selector="onNormalTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="mLm-aL-Ebi"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQQ-t9-w1l">
-                                        <rect key="frame" x="37" y="246" width="86" height="30"/>
+                                        <rect key="frame" x="36" y="210" width="86" height="30"/>
                                         <state key="normal" title="Shared Lane"/>
                                         <connections>
                                             <action selector="onSharedTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="P1m-BP-sBD"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUP-vk-SNc">
-                                        <rect key="frame" x="47" y="86" width="64" height="30"/>
+                                        <rect key="frame" x="47" y="69" width="64" height="30"/>
                                         <state key="normal" title="Off-Road"/>
                                         <connections>
                                             <action selector="onOffRoadTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="sE1-Yq-O39"/>
@@ -200,20 +200,28 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InB-9H-EZb">
+                                        <rect key="frame" x="39" y="260" width="80" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Cycle Track"/>
+                                        <connections>
+                                            <action selector="onCycleTrackTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="rOP-z2-oqV"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="DQQ-t9-w1l" firstAttribute="top" secondItem="c7L-fA-nuc" secondAttribute="bottom" constant="26" id="6C8-Hi-pEs"/>
+                                    <constraint firstItem="DQQ-t9-w1l" firstAttribute="top" secondItem="c7L-fA-nuc" secondAttribute="bottom" constant="18" id="6C8-Hi-pEs"/>
                                     <constraint firstItem="c7L-fA-nuc" firstAttribute="centerX" secondItem="1uR-8Z-UVu" secondAttribute="centerX" id="9D4-XA-qAb"/>
                                     <constraint firstItem="PYD-Z2-uDd" firstAttribute="centerX" secondItem="1uR-8Z-UVu" secondAttribute="centerX" id="BpW-c1-Ydg"/>
                                     <constraint firstItem="nUP-vk-SNc" firstAttribute="centerX" secondItem="WIL-Mr-Pww" secondAttribute="centerX" id="DJk-qE-YOG"/>
-                                    <constraint firstItem="WIL-Mr-Pww" firstAttribute="top" secondItem="nUP-vk-SNc" secondAttribute="bottom" constant="23" id="Dck-IA-k7d"/>
+                                    <constraint firstItem="WIL-Mr-Pww" firstAttribute="top" secondItem="nUP-vk-SNc" secondAttribute="bottom" constant="17" id="Dck-IA-k7d"/>
                                     <constraint firstItem="WIL-Mr-Pww" firstAttribute="centerX" secondItem="DQQ-t9-w1l" secondAttribute="centerX" id="NWS-Og-rUb"/>
                                     <constraint firstItem="PYD-Z2-uDd" firstAttribute="centerX" secondItem="nUP-vk-SNc" secondAttribute="centerX" id="Quc-uN-w69"/>
-                                    <constraint firstItem="nUP-vk-SNc" firstAttribute="top" secondItem="PYD-Z2-uDd" secondAttribute="bottom" constant="25" id="ZgV-X3-8P8"/>
+                                    <constraint firstItem="nUP-vk-SNc" firstAttribute="top" secondItem="PYD-Z2-uDd" secondAttribute="bottom" constant="8" id="ZgV-X3-8P8"/>
                                     <constraint firstItem="PYD-Z2-uDd" firstAttribute="top" secondItem="1uR-8Z-UVu" secondAttribute="top" constant="40" id="aYI-Mb-toa"/>
                                     <constraint firstItem="nUP-vk-SNc" firstAttribute="centerX" secondItem="1uR-8Z-UVu" secondAttribute="centerX" id="b76-YA-ote"/>
-                                    <constraint firstItem="c7L-fA-nuc" firstAttribute="top" secondItem="WIL-Mr-Pww" secondAttribute="bottom" constant="21" id="eqF-Dc-cpU"/>
+                                    <constraint firstItem="c7L-fA-nuc" firstAttribute="top" secondItem="WIL-Mr-Pww" secondAttribute="bottom" constant="16" id="eqF-Dc-cpU"/>
                                     <constraint firstItem="DQQ-t9-w1l" firstAttribute="centerX" secondItem="1uR-8Z-UVu" secondAttribute="centerX" id="h17-Lu-AYL"/>
                                     <constraint firstItem="WIL-Mr-Pww" firstAttribute="centerX" secondItem="c7L-fA-nuc" secondAttribute="centerX" id="hmT-dc-3kk"/>
                                     <constraint firstItem="WIL-Mr-Pww" firstAttribute="centerX" secondItem="1uR-8Z-UVu" secondAttribute="centerX" id="uGG-nF-hVz"/>
@@ -260,6 +268,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="bufferedOutlet" destination="WIL-Mr-Pww" id="x3a-5k-MV4"/>
+                        <outlet property="cycleTrackOutlet" destination="InB-9H-EZb" id="wf7-Jf-cYk"/>
                         <outlet property="directionsButton" destination="sDd-1q-LgV" id="LvQ-zI-CfN"/>
                         <outlet property="distanceLabel" destination="YRA-6i-mTB" id="zRs-iN-nbs"/>
                         <outlet property="distanceSmallView" destination="432-YV-QgA" id="cy2-x6-JxT"/>
