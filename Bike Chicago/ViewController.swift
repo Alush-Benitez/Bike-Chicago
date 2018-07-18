@@ -41,7 +41,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var cancelButton: UIButton!
     
     
-    
+    var bikeRacks: [BikeRack] = []
     var selectedMapItem = MKMapItem()
     var mapItems = [MKMapItem]()
     let locationManager = CLLocationManager()
@@ -65,6 +65,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadInitialData()
+        //mapView.addAnnotations(bikeRacks)
+ 
+
         let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
         mapView.addGestureRecognizer(mapTap)
         
@@ -83,6 +87,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         cancelButton.layer.cornerRadius = 5
         cancelButton.alpha = 0
         goButton.alpha = 0
+        infoView.layer.cornerRadius = 20
+        
         
         
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
@@ -380,6 +386,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         infoView.layer.cornerRadius = 20
+        directionsButton.isHidden = false
+        distanceLabel.isHidden = true
         streetLabel.text = selectedMapItem.name!
         startStreetLabel.text = ""
         endStreetLabel.text = ""
@@ -403,6 +411,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBAction func directionsTapped(_ sender: Any) {
         getDirections(lat: selectedLat, long: selectedLong, showPolyline: true)
+        
+        
+        for bikeRack in bikeRacks {
+            var temp = [BikeRack]()
+            if bikeRack.coordinate.latitude > selectedLat - 0.005 && bikeRack.coordinate.latitude < selectedLat + 0.005 {
+                if bikeRack.coordinate.longitude > selectedLong - 0.005 && bikeRack.coordinate.longitude < selectedLong + 0.005 {
+                    temp.append(bikeRack)
+                    mapView.addAnnotations(temp)
+                }
+            }
+        }
+        
         UIView.animate(withDuration: 0.3) {
             self.infoView.alpha = 0
         }
@@ -550,6 +570,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         UIView.animate(withDuration: 0.3) {
             self.cancelButton.alpha = 0
         }
+        
+        for bikeRack in bikeRacks {
+            mapView.removeAnnotation(bikeRack)
+        }
     }
     
     func checkIfRoute(route: MKOverlay) -> Bool{
@@ -563,7 +587,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     @objc func mapTapped(_ tap: UITapGestureRecognizer) {
-        print("hello there")
         if tap.state == .recognized/* && tap.state == .recognized*/ {
             // Get map coordinate from touch point
             let touchPt: CGPoint = tap.location(in: mapView)
@@ -630,9 +653,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
     }
     
+    func makeBold(routeToBold: MKPolyline){
+        for route in bikeRoutes{
+            if route.isBold == true{
+                mapView.remove(route.routeLine)
+                route.isBold = false
+                mapView.add(route.routeLine)
+            }
+            if routeToBold == (route.routeLine) {
+                mapView.remove(routeToBold)
+                route.isBold = true
+                mapView.add(routeToBold)
+                //showInfoWhenLaneTapped(line: nearestPoly!)
+            }
+        }
+    }
+    
     func showInfoWhenLaneTapped(line: MKPolyline) {
-        infoView.alpha = 1.0
-        directionsButton.alpha = 0.0
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 0.9
+        }
+        distanceLabel.isHidden = false
+        directionsButton.isHidden = true
         for route in bikeRoutes {
             if route.routeLine == line {
                 //if route.streetName.first != String {
@@ -642,9 +684,25 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 startStreetLabel.text = route.startStreet.capitalized
                 endStreetLabel.text = route.endStreet.capitalized
-                distanceLabel.text = String(route.lengthInFeet/5280.0)
+                distanceLabel.text = String(format: "%.2f", route.lengthInFeet/5280.0) + " mi"
             }
         }
+    }
+    
+    
+    func loadInitialData() {
+        guard let fileName = Bundle.main.path(forResource: "rows", ofType: "json")
+            else { return }
+        let optionalData = try? Data(contentsOf: URL(fileURLWithPath: fileName))
+        
+        guard
+            let data = optionalData,
+            let json = try? JSONSerialization.jsonObject(with: data),
+            let dictionary = json as? [String: Any],
+            let works = dictionary["data"] as? [[Any]]
+            else { return }
+        let validWorks = works.compactMap { BikeRack(json: $0) }
+        bikeRacks.append(contentsOf: validWorks)
     }
 }
 

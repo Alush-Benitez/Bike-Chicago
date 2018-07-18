@@ -17,6 +17,8 @@
 		4AC2A5E020F90C6200A94BB6 /* Bike_ChicagoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5DF20F90C6200A94BB6 /* Bike_ChicagoTests.swift */; };
 		4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */; };
 		4AC2A5F320FBF31600A94BB6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC2A5F220FBF31600A94BB6 /* MapKit.framework */; };
+		4AF0172E20FFBAA000B77305 /* Bike Rack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF0172D20FFBAA000B77305 /* Bike Rack.swift */; };
+		4AF0173020FFBC4B00B77305 /* rows.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AF0172F20FFBC4B00B77305 /* rows.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		4AC2A5E120F90C6200A94BB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bike Route.swift"; sourceTree = "<group>"; };
 		4AC2A5F220FBF31600A94BB6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4AF0172D20FFBAA000B77305 /* Bike Rack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bike Rack.swift"; sourceTree = "<group>"; };
+		4AF0172F20FFBC4B00B77305 /* rows.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = rows.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +104,12 @@
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
 				4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */,
+				4AF0172D20FFBAA000B77305 /* Bike Rack.swift */,
 				4AC2A5EC20F925EA00A94BB6 /* Bike Route.swift */,
 				4AC2A5D620F90C6200A94BB6 /* Info.plist */,
 				1457E7FD20F923E8008F6FE7 /* bikedata.json */,
 				14BAB28020F92E1C0060315F /* SwiftyJSON.swift */,
+				4AF0172F20FFBC4B00B77305 /* rows.json */,
 			);
 			path = "Bike Chicago";
 			sourceTree = "<group>";
@@ -214,6 +220,7 @@
 				1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */,
 				4AC2A5D520F90C6200A94BB6 /* LaunchScreen.storyboard in Resources */,
 				4AC2A5D220F90C6200A94BB6 /* Assets.xcassets in Resources */,
+				4AF0173020FFBC4B00B77305 /* rows.json in Resources */,
 				4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -236,6 +243,7 @@
 				14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */,
 				4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */,
 				4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */,
+				4AF0172E20FFBAA000B77305 /* Bike Rack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
