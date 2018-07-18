@@ -16,7 +16,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     @IBOutlet weak var hamburgerView: UIView!
     
-    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var streetLabel: UILabel!
@@ -75,7 +74,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         hamburgerView.layer.cornerRadius = 20;
         hamburgerView.layer.masksToBounds = true;
         hamburgerView.alpha = 0.0
-        leadingConstraint.constant = 30
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         mapView.delegate = self
