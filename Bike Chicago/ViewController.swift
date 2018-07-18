@@ -47,8 +47,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var selectedPathTypes = [1,1,1,1,1]
     //
     
-    //let map = MKMapView()
-    //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+    let map = MKMapView()
+    let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
     
     var hamburgerIsVisible = false
     
@@ -61,8 +61,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
-       // mapView.addGestureRecognizer(mapTap)
+         let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+        mapView.addGestureRecognizer(mapTap)
         
         hamburgerView.layer.cornerRadius = 20;
         hamburgerView.layer.masksToBounds = true;
@@ -259,9 +259,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         polyLineRenderer.strokeColor = .green
                     } else if route.routeType == "SHARED-LANE" {
                         polyLineRenderer.strokeColor = .purple
-                    } else {
+                    } else { // offroad
                         polyLineRenderer.strokeColor = .orange
                     }
+                    
+                    if route.isBold{
+                        polyLineRenderer.lineWidth = 3.0
+                    }
+                    
                     return polyLineRenderer
 
                 } else {
@@ -524,13 +529,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
-                //makeBold(routeToBold: nearestPoly!)
+                makeBold(routeToBold: nearestPoly!)
             }
         }
     }
     
     func makeBold(routeToBold: MKPolyline){
         for route in bikeRoutes{
+            if route.isBold == true{
+                mapView.remove(route.routeLine)
+                route.isBold = false
+                mapView.add(route.routeLine)
+            }
             if routeToBold == (route.routeLine) {
                 mapView.remove(routeToBold)
                 route.isBold = true
