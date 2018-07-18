@@ -18,7 +18,7 @@ class BikeRoute: MKPolyline {
     var endStreet = ""
     var lengthInFeet = 0.0
     var routeLine = MKPolyline()
-    
+    var isBold = false
     
     init(routeType: String, streetName: String, startStreet: String, endStreet: String, lengthInFeet: Double, route: MKPolyline){
         super.init()
@@ -28,6 +28,7 @@ class BikeRoute: MKPolyline {
         self.endStreet = endStreet
         self.lengthInFeet = lengthInFeet
         self.routeLine = route
+        self.isBold = false
     }
     
     override init() {
@@ -38,6 +39,7 @@ class BikeRoute: MKPolyline {
         self.endStreet = ""
         self.lengthInFeet = 0
         self.routeLine = MKPolyline()
+        self.isBold = false
     }
     
     

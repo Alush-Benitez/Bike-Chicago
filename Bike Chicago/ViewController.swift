@@ -250,7 +250,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             for route in bikeRoutes{
                 if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
-                    print("nailedIt")
+                    
                     if route.routeType == "CYCLE TRACK" {
                         polyLineRenderer.strokeColor = .red
                     } else if route.routeType == "BIKE LANE" {
@@ -259,7 +259,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         polyLineRenderer.strokeColor = .green
                     } else if route.routeType == "SHARED-LANE" {
                         polyLineRenderer.strokeColor = .black
-                    } else {
+                    } else { // off road
                         polyLineRenderer.strokeColor = .orange
                     }
                 }
@@ -412,26 +412,36 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func onOffRoadTapped(_ sender: Any) {
         pathToggle(index: 0)
         selectChange(button: offRoadOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onBufferedTapped(_ sender: Any) {
         pathToggle(index: 1)
         selectChange(button: bufferedOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onNormalTapped(_ sender: Any) {
         pathToggle(index: 2)
         selectChange(button: normalButtonOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onSharedTapped(_ sender: Any) {
         pathToggle(index: 3)
         selectChange(button: sharedLaneOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onCycleTrackTapped(_ sender: Any) {
         pathToggle(index: 4)
         selectChange(button: cycleTrackOutlet)
+        reloadLinesWithToggle()
+
     }
     
     
@@ -443,7 +453,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             leadingConstraint.constant = -150
             //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
             hamburgerIsVisible = false
-            reloadLinesWithToggle()
         } else {
             //if the hamburger menu IS NOT visible, then move the ubeView back to its original position
             hamburgerView.alpha = 1.0
@@ -516,6 +525,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
+                //makeBold(routeToBold: nearestPoly!)
+            }
+        }
+    }
+    
+    func makeBold(routeToBold: MKPolyline){
+        for route in bikeRoutes{
+            if routeToBold == (route.routeLine) {
+                mapView.remove(routeToBold)
+                route.isBold = true
+                mapView.add(routeToBold)
             }
         }
     }
