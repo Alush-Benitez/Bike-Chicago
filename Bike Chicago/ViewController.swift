@@ -250,7 +250,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             for route in bikeRoutes{
                 if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
-                    print("nailedIt")
+                    polyLineRenderer.lineWidth = 1.5
                     if route.routeType == "CYCLE TRACK" {
                         polyLineRenderer.strokeColor = .red
                     } else if route.routeType == "BIKE LANE" {
@@ -258,22 +258,21 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     } else if route.routeType == "BUFFERED BIKE LANE" {
                         polyLineRenderer.strokeColor = .green
                     } else if route.routeType == "SHARED-LANE" {
-                        polyLineRenderer.strokeColor = .black
+                        polyLineRenderer.strokeColor = .purple
                     } else {
                         polyLineRenderer.strokeColor = .orange
                     }
+                    return polyLineRenderer
+
+                } else {
+                    polyLineRenderer.strokeColor = .black
+                    polyLineRenderer.lineWidth = 0.6
                 }
             }
-            
-            polyLineRenderer.lineWidth = 1.0
-            print(polyLineRenderer.strokeColor)
             return polyLineRenderer
         }
         return MKPolylineRenderer()
     }
-    
-    
-    
     
     
     func displayMesage(message:String){
@@ -483,8 +482,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
-                self.etaBike.text = "\(String(format: "%.1f", (route.expectedTravelTime / 4.0) / 60)) min"
-                self.etaWalk.text = "\(String(format: "%.1f", route.expectedTravelTime / 60.0)) min"
+                self.etaBike.text = "\(String(format: "%.1f", Int((route.expectedTravelTime / 4.0) / 60) / 60)) hr \(String(format: "%.1f", Int(route.expectedTravelTime / 4) % 60)) min"
+                self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60) / 60)) hr \(String(Int(route.expectedTravelTime) % 60)) min"
             }
         }
     }
