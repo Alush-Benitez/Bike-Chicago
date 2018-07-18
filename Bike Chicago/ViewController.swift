@@ -262,18 +262,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     } else { // off road
                         polyLineRenderer.strokeColor = .orange
                     }
+                    return polyLineRenderer
+
+                } else {
+                    polyLineRenderer.strokeColor = .black
+                    polyLineRenderer.lineWidth = 0.6
                 }
             }
-            
-            polyLineRenderer.lineWidth = 1.0
-            print(polyLineRenderer.strokeColor)
             return polyLineRenderer
         }
         return MKPolylineRenderer()
     }
-    
-    
-    
     
     
     func displayMesage(message:String){
@@ -492,8 +491,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
-                self.etaBike.text = "\(String(format: "%.1f", (route.expectedTravelTime / 4.0) / 60)) min"
-                self.etaWalk.text = "\(String(format: "%.1f", route.expectedTravelTime / 60.0)) min"
+                self.etaBike.text = "\(String(format: "%.1f", Int((route.expectedTravelTime / 4.0) / 60) / 60)) hr \(String(format: "%.1f", Int(route.expectedTravelTime / 4) % 60)) min"
+                self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60) / 60)) hr \(String(Int(route.expectedTravelTime) % 60)) min"
             }
         }
     }
