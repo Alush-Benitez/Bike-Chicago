@@ -237,18 +237,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     func addRoutes() {
-        for overlay in mapView.overlays{
-            mapView.remove(overlay)
-        }
+        mapView.removeOverlays(mapView.overlays)
         for route in bikeRoutes {
             mapView.add(route.routeLine)
         }
     }
     
     func reloadLinesWithToggle(){
-        for overlay in mapView.overlays{
-            mapView.remove(overlay)
-        }
+        mapView.removeOverlays(mapView.overlays)
         for route in bikeRoutes {
             if routeShouldLoad(route: route){
                 mapView.add(route.routeLine)
@@ -258,16 +254,16 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func routeShouldLoad(route: BikeRoute) -> Bool{
         let type = route.routeType
-        if type == "OFF-STREET TRAIL" && selectedPathTypes[0] == 1 {
+        if (type == "OFF-STREET TRAIL" || type == "ACCESS PATH") && selectedPathTypes[0] == 1 {
             return true
         }
-        else if type == "BUFFERED BIKE LANE" && selectedPathTypes[1] == 1{
+        else if (type == "BUFFERED BIKE LANE" || type == "GREEN WAVE") && selectedPathTypes[1] == 1{
             return true
         }
         else if type == "BIKE LANE" && selectedPathTypes[2] == 1{
             return true
         }
-        else if type == "SHARED-LANE" && selectedPathTypes[3] == 1{
+        else if (type == "SHARED-LANE" || type == "NEIGHBORHOOD GREENWAY") && selectedPathTypes[3] == 1{
             return true
         }
         else if type == "CYCLE TRACK" && selectedPathTypes[4] == 1{
@@ -287,13 +283,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         polyLineRenderer.strokeColor = UIColor(red: 1.0, green: 59/255.0, blue: 61/255.0, alpha: 1)
                     } else if route.routeType == "BIKE LANE" {
                         polyLineRenderer.strokeColor = UIColor(red: 13/255.0, green: 174/255.0, blue: 230/255.0, alpha: 1)
-                    } else if route.routeType == "BUFFERED BIKE LANE" {
+                    } else if route.routeType == "BUFFERED BIKE LANE" || route.routeType == "GREEN WAVE"{
                         polyLineRenderer.strokeColor = UIColor(red: 134/255.0, green: 76/255.0, blue: 188/255.0, alpha: 1)
-                    } else if route.routeType == "SHARED-LANE" {
+                    } else if route.routeType == "SHARED-LANE" || route.routeType == "NEIGHBORHOOD GREENWAY" {
                         polyLineRenderer.strokeColor = UIColor(red: 25/255.0, green: 178/255.0, blue: 54/255.0, alpha: 1)
-                    } else { // offroad
+                    } else if route.routeType == "OFF-STREET TRAIL" || route.routeType == "ACCESS PATH" {
                         polyLineRenderer.strokeColor = UIColor(red: 162/255.0, green: 99/255.0, blue: 81/255.0, alpha: 1)
-                    }
+                    } else {print("error \(route.streetName)    __--\(route.routeType)    \n")}
                     
                     if route.isBold{
                         polyLineRenderer.lineWidth = 3.0
