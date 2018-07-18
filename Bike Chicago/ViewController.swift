@@ -37,7 +37,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var distanceSmallView: UILabel!
     
     
-    
     var selectedMapItem = MKMapItem()
     var mapItems = [MKMapItem]()
     let locationManager = CLLocationManager()
@@ -45,7 +44,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var locValue: CLLocationCoordinate2D? = nil
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
-    var selectedPathType = ""
+    var selectedPathTypes = [1,1,1,1,1]
+    //
     
     var hamburgerIsVisible = true
     
@@ -99,12 +99,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if let url = URL(string: query) {
             if let data = try? Data(contentsOf: url) {
                 let json = try! JSON(data: data)
-                self.parse(json: json, chosenPathType: selectedPathType)
+                self.parse(json: json)
             }
         }
     }
     
-    func parse(json: JSON?, chosenPathType: String) {
+    func parse(json: JSON?) {
         
         let maxNum = (json?.arrayValue.count)!
         
@@ -112,51 +112,45 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 0..<120 {
-                //self.addResults(result: (json?.arrayValue[i])!, i: i)
-                self.addResultsBasedOnChosenType(json: json!, i: i)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.addRoutes()
                 print("section 1 Done")
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 120..<240 {
-                //self.addResults(result: (json?.arrayValue[i])!, i: i)
-                self.addResultsBasedOnChosenType(json: json!, i: i)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.addRoutes()
                 print("section 2 Done")
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 240..<360 {
-                //self.addResults(result: (json?.arrayValue[i])!, i: i)
-                self.addResultsBasedOnChosenType(json: json!, i: i)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.addRoutes()
                 print("section 3 Done")
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 360..<480 {
-                //self.addResults(result: (json?.arrayValue[i])!, i: i)
-                self.addResultsBasedOnChosenType(json: json!, i: i)
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.addRoutes()
                 print("section 4 Done")
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 480..<maxNum {
-                //self.addResults(result: (json?.arrayValue[i])!, i: i)
-                self.addResultsBasedOnChosenType(json: json!, i: i)
-                
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.sync {
                 self.addRoutes()
                 print("section 5 Done")
             }
@@ -202,6 +196,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.setRegion(coordinateRegion!, animated: true)
     }
     
+    
+    
     func addRoutes() {
         for overlay in mapView.overlays{
             mapView.remove(overlay)
@@ -210,32 +206,51 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             mapView.add(route.routeLine)
         }
     }
-    
+    /*
+     func reloadLinesWithToggle(){
+     for overlay in mapView.overlays{
+     mapView.remove(overlay)
+     }
+     for route in bikeRoutes {
+     
+     mapView.add(route.routeLine)
+     }
+     }
+     */
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
+            
+            for route in bikeRoutes{
+                
+                
+                if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
+                    print("nailedIt")
+                    
+                    
+                    
+                    if route.routeType == "CYCLE TRACK" {
+                        polyLineRenderer.strokeColor = .red
+                    } else if route.routeType == "BIKE LANE" {
+                        polyLineRenderer.strokeColor = .blue
+                    } else if route.routeType == "BUFFERED BIKE LANE" {
+                        polyLineRenderer.strokeColor = .green
+                    } else if route.routeType == "SHARED-LANE" {
+                        polyLineRenderer.strokeColor = .black
+                    } else {
+                        polyLineRenderer.strokeColor = .orange
+                    }
+                }
+            }
             polyLineRenderer.lineWidth = 1.0
-            polyLineRenderer.strokeColor = .blue
-            
-            /*
-             if overlay.routeType == "Cycle Track" {
-             polyLineRenderer.strokeColor = .red
-             } else if overlay.routeType == "Bike Lane" {
-             polyLineRenderer.strokeColor = .blue
-             } else if overlay.routeType == "Buffered Bike Lane" {
-             polyLineRenderer.strokeColor = .green
-             } else if overlay.routeType == "Shared-Lane" {
-             polyLineRenderer.strokeColor = .black
-             } else {
-             polyLineRenderer.strokeColor = .orange
-             }
-             */
-            
+            print(polyLineRenderer.strokeColor)
             return polyLineRenderer
         }
         return MKPolylineRenderer()
     }
+    
+    
     
     
     
@@ -351,41 +366,53 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
+    
+    func selectChange(button: UIButton){
+        if button.alpha == 1.0 {
+            button.alpha = 0.5
+        }
+        else if button.alpha == 0.5{
+            button.alpha = 1.0
+        }
+    }
+    
+    func pathToggle(index: Int){
+        
+        if selectedPathTypes[index] == 1{
+            selectedPathTypes[index] = 0
+        }
+        else{
+            selectedPathTypes[index] = 1
+        }
+        
+    }
+    
     @IBAction func onOffRoadTapped(_ sender: Any) {
-        selectedPathType = "OFF-STREET TRAIL"
-        changeHamburgerButtonAlpha()
-        offRoadOutlet.alpha = 1.0
-        print()
-        //grabData()
+        pathToggle(index: 0)
+        selectChange(button: offRoadOutlet)
     }
     
     @IBAction func onBufferedTapped(_ sender: Any) {
-        selectedPathType = "BUFFERED BIKE LANE"
-        changeHamburgerButtonAlpha()
-        bufferedOutlet.alpha = 1.0
-        //grabData()
+        pathToggle(index: 1)
+        selectChange(button: bufferedOutlet)
     }
     
     @IBAction func onNormalTapped(_ sender: Any) {
-        selectedPathType = "BIKE LANE"
-        changeHamburgerButtonAlpha()
-        normalButtonOutlet.alpha = 1.0
-        //grabData()
+        pathToggle(index: 2)
+        selectChange(button: normalButtonOutlet)
     }
     
     @IBAction func onSharedTapped(_ sender: Any) {
-        selectedPathType = "SHARED-LANE"
-        changeHamburgerButtonAlpha()
-        sharedLaneOutlet.alpha = 1.0
-        //grabData()
-        
+        pathToggle(index: 3)
+        selectChange(button: sharedLaneOutlet)
     }
+    
     @IBAction func onCycleTrackTapped(_ sender: Any) {
-        selectedPathType = "CYCLE TRACK"
-        changeHamburgerButtonAlpha()
-        cycleTrackOutlet.alpha = 1.0
-        //grabData()
+        pathToggle(index: 4)
+        selectChange(button: cycleTrackOutlet)
     }
+    
+    
     
     @IBAction func onHamburgerTapped(_ sender: Any) {
         //if the hamburger menu is NOT visible, then move the ubeView back to where it used to be
@@ -399,9 +426,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             hamburgerView.alpha = 1.0
             leadingConstraint.constant = 0
             //trailingC.constant = 0
-            
             //2
             hamburgerIsVisible = false
+            
+            //reloadLinesWithToggle()
         }
         
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
@@ -439,20 +467,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
     }
-    
-    func addResultsBasedOnChosenType(json: JSON, i: Int) {
-        if selectedPathType == "" {
-            self.addResults(result: (json.arrayValue[i]), i: i)
-        } else {
-            self.addResults(result: (json.arrayValue[i][selectedPathType]), i: i)
-        }
-    }
-    
-    func changeHamburgerButtonAlpha() {
-        sharedLaneOutlet.alpha = 0.5
-        bufferedOutlet.alpha = 0.5
-        normalButtonOutlet.alpha = 0.5
-        offRoadOutlet.alpha = 0.5
-        cycleTrackOutlet.alpha = 0.5
-    }
 }
+
+
+
+
+
