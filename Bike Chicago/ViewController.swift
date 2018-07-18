@@ -250,7 +250,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             for route in bikeRoutes{
                 if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
-                    
+                    polyLineRenderer.lineWidth = 1.5
                     if route.routeType == "CYCLE TRACK" {
                         polyLineRenderer.strokeColor = .red
                     } else if route.routeType == "BIKE LANE" {
@@ -258,8 +258,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     } else if route.routeType == "BUFFERED BIKE LANE" {
                         polyLineRenderer.strokeColor = .green
                     } else if route.routeType == "SHARED-LANE" {
-                        polyLineRenderer.strokeColor = .black
-                    } else { // off road
+                        polyLineRenderer.strokeColor = .purple
+                    } else {
                         polyLineRenderer.strokeColor = .orange
                     }
                     return polyLineRenderer
