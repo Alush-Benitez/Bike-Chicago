@@ -11,10 +11,7 @@ import MapKit
 import CoreLocation
 
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
-    
-    @IBOutlet var leadingC: NSLayoutConstraint!
-    @IBOutlet var trailingC: NSLayoutConstraint!
-    
+
     @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var hamburgerView: UIView!
@@ -28,6 +25,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var endStreetLabel: UILabel!
     @IBOutlet weak var directionsButton: UIButton!
     
+    @IBOutlet weak var offRoadOutlet: UIButton!
+    @IBOutlet weak var bufferedOutlet: UIButton!
+    @IBOutlet weak var normalButtonOutlet: UIButton!
+    @IBOutlet weak var sharedLaneOutlet: UIButton!
     
     @IBOutlet weak var smallView: UIView!
     @IBOutlet weak var etaBike: UILabel!
@@ -43,6 +44,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var locValue: CLLocationCoordinate2D? = nil
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
+    var selectedPathType = ""
     
     var hamburgerIsVisible = true
     
@@ -55,8 +57,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hamburgerView.layer.cornerRadius = 20;
+        hamburgerView.layer.masksToBounds = true;
         hamburgerView.alpha = 0.0
-        leadingConstraint.constant = 150
+        leadingConstraint.constant = 30
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         mapView.delegate = self
@@ -94,12 +98,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         if let url = URL(string: query) {
             if let data = try? Data(contentsOf: url) {
                 let json = try! JSON(data: data)
-                self.parse(json: json)
+                self.parse(json: json, chosenPathType: selectedPathType)
             }
         }
     }
     
-    func parse(json: JSON?) {
+    func parse(json: JSON?, chosenPathType: String) {
         
         let maxNum = (json?.arrayValue.count)!
         
@@ -107,7 +111,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 0..<120 {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
+                //self.addResults(result: (json?.arrayValue[i])!, i: i)
+                self.addResultsBasedOnChosenType(json: json!, i: i)
             }
             DispatchQueue.main.async {
                 self.addRoutes()
@@ -116,7 +121,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 120..<240 {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
+                //self.addResults(result: (json?.arrayValue[i])!, i: i)
+                self.addResultsBasedOnChosenType(json: json!, i: i)
             }
             DispatchQueue.main.async {
                 self.addRoutes()
@@ -125,7 +131,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 240..<360 {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
+                //self.addResults(result: (json?.arrayValue[i])!, i: i)
+                self.addResultsBasedOnChosenType(json: json!, i: i)
             }
             DispatchQueue.main.async {
                 self.addRoutes()
@@ -134,7 +141,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 360..<480 {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
+                //self.addResults(result: (json?.arrayValue[i])!, i: i)
+                self.addResultsBasedOnChosenType(json: json!, i: i)
             }
             DispatchQueue.main.async {
                 self.addRoutes()
@@ -143,7 +151,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         DispatchQueue.global(qos: .userInteractive).async {
             for i in 480..<maxNum {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
+                //self.addResults(result: (json?.arrayValue[i])!, i: i)
+                self.addResultsBasedOnChosenType(json: json!, i: i)
                 
             }
             DispatchQueue.main.async {
@@ -155,6 +164,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func addResults(result: JSON, i: Int){
+        
+        //bikeRoutes.removeAll()
         
         var routeType = ""
         var streetName = ""
@@ -340,25 +351,39 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     @IBAction func onOffRoadTapped(_ sender: Any) {
+        selectedPathType = "OFF-STREET TRAIL"
+        changeHamburgerButtonAlpha()
+        offRoadOutlet.alpha = 1.0
+        //grabData()
     }
     
     @IBAction func onBufferedTapped(_ sender: Any) {
+        selectedPathType = "BUFFERED BIKE LANE"
+        changeHamburgerButtonAlpha()
+        bufferedOutlet.alpha = 1.0
+        //grabData()
     }
     
     @IBAction func onNormalTapped(_ sender: Any) {
+        selectedPathType = "BIKE LANE"
+        changeHamburgerButtonAlpha()
+        normalButtonOutlet.alpha = 1.0
+       //grabData()
     }
     
     @IBAction func onSharedTapped(_ sender: Any) {
+        selectedPathType = "SHARED-LANE"
+        changeHamburgerButtonAlpha()
+        sharedLaneOutlet.alpha = 1.0
+        //grabData()
+        
     }
     @IBAction func onHamburgerTapped(_ sender: Any) {
         //if the hamburger menu is NOT visible, then move the ubeView back to where it used to be
         if !hamburgerIsVisible {
             hamburgerView.alpha = 0.0
-            leadingConstraint.constant = 150
+            leadingConstraint.constant = -150
             //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
-            //trailingC.constant = -150
-            
-            //1
             hamburgerIsVisible = true
         } else {
             //if the hamburger menu IS visible, then move the ubeView back to its original position
@@ -373,11 +398,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
             self.view.layoutIfNeeded()
         }) { (animationComplete) in
-            print("The animation is complete!")
         }
     }
-    
-    @IBOutlet weak var onHamburgerTapped: UIBarButtonItem!
+
     func getDirections(lat: Double, long: Double, showPolyline: Bool) {
         
         let request = MKDirectionsRequest()
@@ -408,7 +431,43 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
     
-    func updatePaths() {
-        
+    func addResultsBasedOnChosenType(json: JSON, i: Int) {
+        if selectedPathType == "" {
+            self.addResults(result: (json.arrayValue[i]), i: i)
+        } else {
+            self.addResults(result: (json.arrayValue[i][selectedPathType]), i: i)
+        }
+    }
+    
+    func changeHamburgerButtonAlpha() {
+        sharedLaneOutlet.alpha = 0.5
+        bufferedOutlet.alpha = 0.5
+        normalButtonOutlet.alpha = 0.5
+        offRoadOutlet.alpha = 0.5
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
