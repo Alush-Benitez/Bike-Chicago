@@ -44,7 +44,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
     
-    var hamburgerIsVisible = false
+    var hamburgerIsVisible = true
     
     var selectedLong = 0.0
     var selectedLat = 0.0
@@ -55,6 +55,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hamburgerView.alpha = 0.0
+        leadingConstraint.constant = 150
         locationManager.requestWhenInUseAuthorization()
         locationManager.delegate = self
         mapView.delegate = self
@@ -351,7 +353,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func onHamburgerTapped(_ sender: Any) {
         //if the hamburger menu is NOT visible, then move the ubeView back to where it used to be
         if !hamburgerIsVisible {
-            leadingConstraint.constant = -150
+            hamburgerView.alpha = 0.0
+            leadingConstraint.constant = 150
             //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
             //trailingC.constant = -150
             
@@ -359,6 +362,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             hamburgerIsVisible = true
         } else {
             //if the hamburger menu IS visible, then move the ubeView back to its original position
+            hamburgerView.alpha = 1.0
             leadingConstraint.constant = 0
             //trailingC.constant = 0
             
@@ -402,5 +406,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 self.etaWalk.text = "\(String(format: "%.1f", route.expectedTravelTime / 60.0)) min"
             }
         }
+    }
+    
+    func updatePaths() {
+        
     }
 }
