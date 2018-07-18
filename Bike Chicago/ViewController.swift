@@ -61,8 +61,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
-       // mapView.addGestureRecognizer(mapTap)
+        let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+        mapView.addGestureRecognizer(mapTap)
         
         hamburgerView.layer.cornerRadius = 20;
         hamburgerView.layer.masksToBounds = true;
@@ -266,7 +266,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
             
             polyLineRenderer.lineWidth = 1.0
-            print(polyLineRenderer.strokeColor)
+            //print(polyLineRenderer.strokeColor)
             return polyLineRenderer
         }
         return MKPolylineRenderer()
@@ -516,6 +516,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
+                showInfoWhenLaneTapped(line: nearestPoly!)
             }
         }
     }
@@ -553,6 +554,23 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let coordA: CLLocationCoordinate2D = mapView.convert(pt, toCoordinateFrom: mapView)
         let coordB: CLLocationCoordinate2D = mapView.convert(ptB, toCoordinateFrom: mapView)
         return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
+    }
+    
+    func showInfoWhenLaneTapped(line: MKPolyline) {
+        infoView.alpha = 1.0
+        directionsButton.alpha = 0.0
+        for route in bikeRoutes {
+            if route.routeLine == line {
+                //if route.streetName.first != String {
+                    //streetLabel.text = route.streetName.lowercased()
+                //} else {
+                    streetLabel.text = route.streetName.capitalized
+                //}
+                startStreetLabel.text = route.startStreet.capitalized
+                endStreetLabel.text = route.endStreet.capitalized
+                distanceLabel.text = String(route.lengthInFeet/5280.0)
+            }
+        }
     }
 }
 
