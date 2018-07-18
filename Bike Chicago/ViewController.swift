@@ -576,6 +576,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
                 showInfoWhenLaneTapped(line: nearestPoly!)
+                makeBold(routeToBold: nearestPoly!)
             }
         }
     }
@@ -615,6 +616,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
     }
     
+    func makeBold(routeToBold: MKPolyline){
+        for route in bikeRoutes{
+            if route.isBold == true{
+                mapView.remove(route.routeLine)
+                route.isBold = false
+                mapView.add(route.routeLine)
+            }
+            if routeToBold == (route.routeLine) {
+                mapView.remove(routeToBold)
+                route.isBold = true
+                mapView.add(routeToBold)
+                //showInfoWhenLaneTapped(line: nearestPoly!)
+            }
+        }
+    }
+    
     func showInfoWhenLaneTapped(line: MKPolyline) {
         infoView.alpha = 1.0
         directionsButton.alpha = 0.0
@@ -627,7 +644,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 startStreetLabel.text = route.startStreet.capitalized
                 endStreetLabel.text = route.endStreet.capitalized
-                distanceLabel.text = String(route.lengthInFeet/5280.0)
+                distanceLabel.text = String(format: "%.2f", route.lengthInFeet/5280.0) + " mi"
             }
         }
     }
