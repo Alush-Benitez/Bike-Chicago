@@ -37,6 +37,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var distanceSmallView: UILabel!
     
     
+    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    
+    
     var selectedMapItem = MKMapItem()
     var mapItems = [MKMapItem]()
     let locationManager = CLLocationManager()
@@ -45,10 +50,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
     var selectedPathTypes = [1,1,1,1,1]
-    //
     
-    //let map = MKMapView()
-    //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+    let map = MKMapView()
+    let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
     
     var hamburgerIsVisible = false
     
@@ -75,6 +79,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         directionsButton.layer.cornerRadius = 20
         smallView.alpha = 0
         smallView.layer.cornerRadius = 10
+        goButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.alpha = 0
+        goButton.alpha = 0
         
         
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
@@ -250,7 +258,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
             for route in bikeRoutes{
                 if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
-                    print("nailedIt")
+                    polyLineRenderer.lineWidth = 1.5
                     if route.routeType == "CYCLE TRACK" {
                         polyLineRenderer.strokeColor = .red
                     } else if route.routeType == "BIKE LANE" {
@@ -258,10 +266,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     } else if route.routeType == "BUFFERED BIKE LANE" {
                         polyLineRenderer.strokeColor = .green
                     } else if route.routeType == "SHARED-LANE" {
-                        polyLineRenderer.strokeColor = .black
-                    } else {
+                        polyLineRenderer.strokeColor = .purple
+                    } else { // offroad
                         polyLineRenderer.strokeColor = .orange
                     }
+                    
+                    if route.isBold{
+                        polyLineRenderer.lineWidth = 3.0
+                    }
+                    
+                    return polyLineRenderer
+
+                } else {
+                    polyLineRenderer.strokeColor = .black
+                    polyLineRenderer.lineWidth = 0.6
                 }
             }
             
@@ -271,9 +289,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         return MKPolylineRenderer()
     }
-    
-    
-    
     
     
     func displayMesage(message:String){
@@ -386,6 +401,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         UIView.animate(withDuration: 0.3) {
             self.smallView.alpha = 0.9
         }
+        UIView.animate(withDuration: 0.3) {
+            self.goButton.alpha = 0.9
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.cancelButton.alpha = 0.9
+        }
     }
     
     
@@ -412,26 +433,36 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func onOffRoadTapped(_ sender: Any) {
         pathToggle(index: 0)
         selectChange(button: offRoadOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onBufferedTapped(_ sender: Any) {
         pathToggle(index: 1)
         selectChange(button: bufferedOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onNormalTapped(_ sender: Any) {
         pathToggle(index: 2)
         selectChange(button: normalButtonOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onSharedTapped(_ sender: Any) {
         pathToggle(index: 3)
         selectChange(button: sharedLaneOutlet)
+        reloadLinesWithToggle()
+
     }
     
     @IBAction func onCycleTrackTapped(_ sender: Any) {
         pathToggle(index: 4)
         selectChange(button: cycleTrackOutlet)
+        reloadLinesWithToggle()
+
     }
     
     
@@ -443,7 +474,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             leadingConstraint.constant = -150
             //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
             hamburgerIsVisible = false
-            reloadLinesWithToggle()
         } else {
             //if the hamburger menu IS NOT visible, then move the ubeView back to its original position
             hamburgerView.alpha = 1.0
@@ -483,11 +513,46 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
-                self.etaBike.text = "\(String(format: "%.1f", (route.expectedTravelTime / 4.0) / 60)) min"
-                self.etaWalk.text = "\(String(format: "%.1f", route.expectedTravelTime / 60.0)) min"
+                self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60) / 60)) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
+                self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60) / 60)) hr \(String(Int(route.expectedTravelTime) % 60)) min"
             }
         }
     }
+    
+    @IBAction func goButtonTapped(_ sender: Any) {
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+        MKMapItem.openMaps(with: [selectedMapItem], launchOptions: launchOptions)
+    }
+    
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        
+        for overlay in mapView.overlays {
+            if !checkIfRoute(route: overlay) {
+                mapView.remove(overlay)
+            }
+        }
+    
+        UIView.animate(withDuration: 0.3) {
+            self.smallView.alpha = 0
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.goButton.alpha = 0
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.cancelButton.alpha = 0
+        }
+    }
+    
+    func checkIfRoute(route: MKOverlay) -> Bool{
+        for bikeroute in bikeRoutes {
+            if route as! MKPolyline == (bikeroute.routeLine as MKPolyline) {
+                return true
+            }
+        }
+        return false
+    }
+    
     
     @objc func mapTapped(_ tap: UITapGestureRecognizer) {
         print("hello there")
