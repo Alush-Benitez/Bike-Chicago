@@ -488,6 +488,72 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
     }
+    
+    @objc func mapTapped(_ tap: UITapGestureRecognizer) {
+        print("hello there")
+        if tap.state == .recognized/* && tap.state == .recognized*/ {
+            // Get map coordinate from touch point
+            let touchPt: CGPoint = tap.location(in: mapView)
+            let coord: CLLocationCoordinate2D = mapView.convert(touchPt, toCoordinateFrom: mapView)
+            let maxMeters: Double = meters(fromPixel: 22, at: touchPt)
+            var nearestDistance: Float = MAXFLOAT
+            var nearestPoly: MKPolyline? = nil
+            // for every overlay ...
+            for overlay: MKOverlay in mapView.overlays {
+                // .. if MKPolyline ...
+                if (overlay is MKPolyline) {
+                    // ... get the distance ...
+                    let distance: Float = Float(distanceOf(pt: MKMapPointForCoordinate(coord), toPoly: overlay as! MKPolyline))
+                    // ... and find the nearest one
+                    if distance < nearestDistance {
+                        nearestDistance = distance
+                        nearestPoly = overlay as! MKPolyline
+                        
+                    }
+                    
+                }
+            }
+            
+            if Double(nearestDistance) <= maxMeters {
+                print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
+            }
+        }
+    }
+    
+    func distanceOf(pt: MKMapPoint, toPoly poly: MKPolyline) -> Double {
+        var distance: Double = Double(MAXFLOAT)
+        for n in 0..<poly.pointCount {
+            let ptA = poly.points()[n]
+            let ptB = poly.points()[n + 1]
+            let xDelta: Double = ptB.x - ptA.x
+            let yDelta: Double = ptB.y - ptA.y
+            if xDelta == 0.0 && yDelta == 0.0 {
+                // Points must not be equal
+                continue
+            }
+            let u: Double = ((pt.x - ptA.x) * xDelta + (pt.y - ptA.y) * yDelta) / (xDelta * xDelta + yDelta * yDelta)
+            var ptClosest: MKMapPoint
+            if u < 0.0 {
+                ptClosest = ptA
+            }
+            else if u > 1.0 {
+                ptClosest = ptB
+            }
+            else {
+                ptClosest = MKMapPointMake(ptA.x + u * xDelta, ptA.y + u * yDelta)
+            }
+            
+            distance = min(distance, MKMetersBetweenMapPoints(ptClosest, pt))
+        }
+        return distance
+    }
+    
+    func meters(fromPixel px: Int, at pt: CGPoint) -> Double {
+        let ptB = CGPoint(x: pt.x + CGFloat(px), y: pt.y)
+        let coordA: CLLocationCoordinate2D = mapView.convert(pt, toCoordinateFrom: mapView)
+        let coordB: CLLocationCoordinate2D = mapView.convert(ptB, toCoordinateFrom: mapView)
+        return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
+    }
 }
 
 
