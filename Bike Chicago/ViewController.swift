@@ -131,7 +131,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         bikeRoutes = [BikeRoute](repeating: BikeRoute(), count: maxNum)
         
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 0..<120 {
+            for i in 0..<100 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -140,7 +140,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 120..<240 {
+            for i in 100..<200 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -149,7 +149,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 240..<360 {
+            for i in 200..<240 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -158,7 +158,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 360..<480 {
+            for i in 240..<360 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -167,12 +167,30 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 480..<maxNum {
+            for i in 360..<430 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
                 self.addRoutes()
                 print("section 5 Done")
+            }
+        }
+        DispatchQueue.global(qos: .userInteractive).async {
+            for i in 430..<480 {
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
+            }
+            DispatchQueue.main.sync {
+                self.addRoutes()
+                print("section 6 Done")
+            }
+        }
+        DispatchQueue.global(qos: .userInteractive).async {
+            for i in 480..<maxNum {
+                self.addResults(result: (json?.arrayValue[i])!, i: i)
+            }
+            DispatchQueue.main.sync {
+                self.addRoutes()
+                print("section 7 Done")
             }
         }
         
@@ -599,6 +617,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
                 showInfoWhenLaneTapped(line: nearestPoly!)
+                makeBold(routeToBold: nearestPoly!)
             }
         }
     }
@@ -638,6 +657,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
     }
     
+    func makeBold(routeToBold: MKPolyline){
+        for route in bikeRoutes{
+            if route.isBold == true{
+                mapView.remove(route.routeLine)
+                route.isBold = false
+                mapView.add(route.routeLine)
+            }
+            if routeToBold == (route.routeLine) {
+                mapView.remove(routeToBold)
+                route.isBold = true
+                mapView.add(routeToBold)
+                //showInfoWhenLaneTapped(line: nearestPoly!)
+            }
+        }
+    }
+    
     func showInfoWhenLaneTapped(line: MKPolyline) {
         UIView.animate(withDuration: 0.3) {
             self.infoView.alpha = 0.9
@@ -653,7 +688,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 startStreetLabel.text = route.startStreet.capitalized
                 endStreetLabel.text = route.endStreet.capitalized
-                distanceLabel.text = String(route.lengthInFeet/5280.0)
+                distanceLabel.text = String(format: "%.2f", route.lengthInFeet/5280.0) + " mi"
             }
         }
     }
