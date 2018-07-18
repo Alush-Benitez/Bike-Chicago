@@ -50,7 +50,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     //let map = MKMapView()
     //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
     
-    var hamburgerIsVisible = true
+    var hamburgerIsVisible = false
     
     var selectedLong = 0.0
     var selectedLat = 0.0
@@ -61,8 +61,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
-        mapView.addGestureRecognizer(mapTap)
+        // let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+       // mapView.addGestureRecognizer(mapTap)
         
         hamburgerView.layer.cornerRadius = 20;
         hamburgerView.layer.masksToBounds = true;
@@ -212,30 +212,45 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             mapView.add(route.routeLine)
         }
     }
-    /*
-     func reloadLinesWithToggle(){
-     for overlay in mapView.overlays{
-     mapView.remove(overlay)
-     }
-     for route in bikeRoutes {
-     
-     mapView.add(route.routeLine)
-     }
-     }
-     */
+    
+    func reloadLinesWithToggle(){
+        for overlay in mapView.overlays{
+            mapView.remove(overlay)
+        }
+        for route in bikeRoutes {
+            if routeShouldLoad(route: route){
+                mapView.add(route.routeLine)
+            }
+        }
+    }
+    
+    func routeShouldLoad(route: BikeRoute) -> Bool{
+        let type = route.routeType
+        if type == "OFF-STREET TRAIL" && selectedPathTypes[0] == 1 {
+            return true
+        }
+        else if type == "BUFFERED BIKE LANE" && selectedPathTypes[1] == 1{
+            return true
+        }
+        else if type == "BIKE LANE" && selectedPathTypes[2] == 1{
+            return true
+        }
+        else if type == "SHARED-LANE" && selectedPathTypes[3] == 1{
+            return true
+        }
+        else if type == "CYCLE TRACK" && selectedPathTypes[4] == 1{
+            return true
+        }
+        return false
+    }
+    
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if overlay is MKPolyline {
             let polyLineRenderer = MKPolylineRenderer(overlay: overlay)
-            
             for route in bikeRoutes{
-                
-                
                 if overlay as! MKPolyline == (route.routeLine as MKPolyline) {
                     print("nailedIt")
-                    
-                    
-                    
                     if route.routeType == "CYCLE TRACK" {
                         polyLineRenderer.strokeColor = .red
                     } else if route.routeType == "BIKE LANE" {
@@ -249,6 +264,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     }
                 }
             }
+            
             polyLineRenderer.lineWidth = 1.0
             print(polyLineRenderer.strokeColor)
             return polyLineRenderer
@@ -421,21 +437,20 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     @IBAction func onHamburgerTapped(_ sender: Any) {
-        //if the hamburger menu is NOT visible, then move the ubeView back to where it used to be
-        if !hamburgerIsVisible {
+        //if the hamburger menu is visible, then move the ubeView back to where it used to be
+        if hamburgerIsVisible {
             hamburgerView.alpha = 0.0
             leadingConstraint.constant = -150
             //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
-            hamburgerIsVisible = true
+            hamburgerIsVisible = false
+            reloadLinesWithToggle()
         } else {
-            //if the hamburger menu IS visible, then move the ubeView back to its original position
+            //if the hamburger menu IS NOT visible, then move the ubeView back to its original position
             hamburgerView.alpha = 1.0
             leadingConstraint.constant = 0
             //trailingC.constant = 0
             //2
-            hamburgerIsVisible = false
-            
-            //reloadLinesWithToggle()
+            hamburgerIsVisible = true
         }
         
         UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
