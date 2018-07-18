@@ -37,6 +37,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBOutlet weak var distanceSmallView: UILabel!
     
     
+    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    
+    
     var selectedMapItem = MKMapItem()
     var mapItems = [MKMapItem]()
     let locationManager = CLLocationManager()
@@ -45,10 +50,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var coordinateRegion: MKCoordinateRegion? = nil
     var search2 = ""
     var selectedPathTypes = [1,1,1,1,1]
-    //
     
-    //let map = MKMapView()
-    //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+    let map = MKMapView()
+    let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
     
     var hamburgerIsVisible = false
     
@@ -75,6 +79,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         directionsButton.layer.cornerRadius = 20
         smallView.alpha = 0
         smallView.layer.cornerRadius = 10
+        goButton.layer.cornerRadius = 10
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.alpha = 0
+        goButton.alpha = 0
         
         
         let initialLocation = CLLocation(latitude: 41.8781, longitude: -87.6298)
@@ -385,6 +393,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         UIView.animate(withDuration: 0.3) {
             self.smallView.alpha = 0.9
         }
+        UIView.animate(withDuration: 0.3) {
+            self.goButton.alpha = 0.9
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.cancelButton.alpha = 0.9
+        }
     }
     
     
@@ -482,11 +496,46 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
-                self.etaBike.text = "\(String(format: "%.1f", Int((route.expectedTravelTime / 4.0) / 60) / 60)) hr \(String(format: "%.1f", Int(route.expectedTravelTime / 4) % 60)) min"
+                self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60) / 60)) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
                 self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60) / 60)) hr \(String(Int(route.expectedTravelTime) % 60)) min"
             }
         }
     }
+    
+    @IBAction func goButtonTapped(_ sender: Any) {
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
+        MKMapItem.openMaps(with: [selectedMapItem], launchOptions: launchOptions)
+    }
+    
+    
+    @IBAction func cancelButtonTapped(_ sender: Any) {
+        
+        for overlay in mapView.overlays {
+            if !checkIfRoute(route: overlay) {
+                mapView.remove(overlay)
+            }
+        }
+    
+        UIView.animate(withDuration: 0.3) {
+            self.smallView.alpha = 0
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.goButton.alpha = 0
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.cancelButton.alpha = 0
+        }
+    }
+    
+    func checkIfRoute(route: MKOverlay) -> Bool{
+        for bikeroute in bikeRoutes {
+            if route as! MKPolyline == (bikeroute.routeLine as MKPolyline) {
+                return true
+            }
+        }
+        return false
+    }
+    
     
     @objc func mapTapped(_ tap: UITapGestureRecognizer) {
         print("hello there")
