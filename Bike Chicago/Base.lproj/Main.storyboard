@@ -39,16 +39,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.6 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRA-6i-mTB">
-                                        <rect key="frame" x="306" y="14" width="50" height="20"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="Q5j-8S-HeZ"/>
-                                            <constraint firstAttribute="height" constant="20" id="fEy-fj-sLT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McCormick Boulevard" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qak-j3-Ef8">
                                         <rect key="frame" x="186" y="91" width="170" height="21"/>
                                         <constraints>
@@ -86,6 +76,16 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.6 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YRA-6i-mTB">
+                                        <rect key="frame" x="285" y="14" width="71" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="71" id="Q5j-8S-HeZ"/>
+                                            <constraint firstAttribute="height" constant="20" id="fEy-fj-sLT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -99,7 +99,7 @@
                                     <constraint firstItem="HDh-1i-R42" firstAttribute="top" secondItem="YtJ-hD-8xM" secondAttribute="bottom" constant="15" id="IC6-ks-Ru6"/>
                                     <constraint firstItem="HDh-1i-R42" firstAttribute="leading" secondItem="sDd-1q-LgV" secondAttribute="trailing" constant="7" id="Oqg-kZ-Drp"/>
                                     <constraint firstItem="YRA-6i-mTB" firstAttribute="trailing" secondItem="qak-j3-Ef8" secondAttribute="trailing" id="Sm5-Ca-kKz"/>
-                                    <constraint firstItem="YRA-6i-mTB" firstAttribute="leading" secondItem="YtJ-hD-8xM" secondAttribute="trailing" constant="29" id="cN6-iu-sHw"/>
+                                    <constraint firstItem="YRA-6i-mTB" firstAttribute="leading" secondItem="YtJ-hD-8xM" secondAttribute="trailing" constant="8" id="cN6-iu-sHw"/>
                                     <constraint firstItem="YtJ-hD-8xM" firstAttribute="top" secondItem="h0C-dG-ZpU" secondAttribute="topMargin" constant="1" id="lBf-q3-A0w"/>
                                     <constraint firstItem="sDd-1q-LgV" firstAttribute="leading" secondItem="h0C-dG-ZpU" secondAttribute="leading" constant="19" id="mbd-5B-Dvs"/>
                                     <constraint firstItem="HDh-1i-R42" firstAttribute="top" secondItem="YRA-6i-mTB" secondAttribute="bottom" constant="20" id="oE6-mm-Lqh"/>

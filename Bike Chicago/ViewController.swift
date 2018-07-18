@@ -65,7 +65,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+        let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
         mapView.addGestureRecognizer(mapTap)
         
         hamburgerView.layer.cornerRadius = 20;
@@ -282,6 +282,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     polyLineRenderer.lineWidth = 0.6
                 }
             }
+            
+            polyLineRenderer.lineWidth = 1.0
+            //print(polyLineRenderer.strokeColor)
             return polyLineRenderer
         }
         return MKPolylineRenderer()
@@ -572,22 +575,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
             if Double(nearestDistance) <= maxMeters {
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
-                makeBold(routeToBold: nearestPoly!)
-            }
-        }
-    }
-    
-    func makeBold(routeToBold: MKPolyline){
-        for route in bikeRoutes{
-            if route.isBold == true{
-                mapView.remove(route.routeLine)
-                route.isBold = false
-                mapView.add(route.routeLine)
-            }
-            if routeToBold == (route.routeLine) {
-                mapView.remove(routeToBold)
-                route.isBold = true
-                mapView.add(routeToBold)
+                showInfoWhenLaneTapped(line: nearestPoly!)
             }
         }
     }
@@ -625,6 +613,23 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let coordA: CLLocationCoordinate2D = mapView.convert(pt, toCoordinateFrom: mapView)
         let coordB: CLLocationCoordinate2D = mapView.convert(ptB, toCoordinateFrom: mapView)
         return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
+    }
+    
+    func showInfoWhenLaneTapped(line: MKPolyline) {
+        infoView.alpha = 1.0
+        directionsButton.alpha = 0.0
+        for route in bikeRoutes {
+            if route.routeLine == line {
+                //if route.streetName.first != String {
+                    //streetLabel.text = route.streetName.lowercased()
+                //} else {
+                    streetLabel.text = route.streetName.capitalized
+                //}
+                startStreetLabel.text = route.startStreet.capitalized
+                endStreetLabel.text = route.endStreet.capitalized
+                distanceLabel.text = String(route.lengthInFeet/5280.0)
+            }
+        }
     }
 }
 
