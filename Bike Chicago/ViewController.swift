@@ -618,6 +618,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
                 showInfoWhenLaneTapped(line: nearestPoly!)
                 makeBold(routeToBold: nearestPoly!)
+            } else {
+                infoView.alpha = 0.0
             }
         }
     }
