@@ -446,10 +446,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func selectChange(button: UIButton){
         if button.alpha == 1.0 {
-            button.alpha = 0.5
+            UIView.animate(withDuration: 0.3) {
+                button.alpha = 0.35
+            }
         }
-        else if button.alpha == 0.5{
-            button.alpha = 1.0
+        else if button.alpha == 0.35{
+            UIView.animate(withDuration: 0.3) {
+                button.alpha = 1
+            }
         }
     }
     
