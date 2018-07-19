@@ -404,13 +404,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4A8MPXMBPS;
+				DEVELOPMENT_TEAM = 5AM4378YJ3;
 				INFOPLIST_FILE = "Bike Chicago/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Bike-ChicagoMFCOOL";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Bike-ChicagoMFCOOLsdgsfdg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -422,13 +422,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4A8MPXMBPS;
+				DEVELOPMENT_TEAM = 5AM4378YJ3;
 				INFOPLIST_FILE = "Bike Chicago/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Bike-ChicagoMFCOOL";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.Bike-ChicagoMFCOOLsdgsfdg";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
