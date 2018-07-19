@@ -516,20 +516,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         request.requestsAlternateRoutes = false
         request.transportType = .walking
         
-        print(lat)
-        print(long)
-        
-        print(request)
-        
         let directions = MKDirections(request: request)
         
         directions.calculate { [unowned self] response, error in
             let unwrappedResponse = response
             for route in (unwrappedResponse?.routes)! {
-                //if showPolyline {
                 self.mapView.add(route.polyline)
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
                 self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60.0 / 60))) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
