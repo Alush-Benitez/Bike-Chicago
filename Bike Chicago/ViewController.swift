@@ -523,7 +523,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             for route in (unwrappedResponse?.routes)! {
                 self.mapView.add(route.polyline)
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
                 self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60.0 / 60))) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
                 self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60 / 60))) hr \(String(Int(route.expectedTravelTime) % 60)) min"
