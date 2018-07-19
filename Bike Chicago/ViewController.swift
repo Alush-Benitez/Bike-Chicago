@@ -52,7 +52,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var selectedPathTypes = [1,1,1,1,1]
     
     let map = MKMapView()
-    let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+    //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
     
     var hamburgerIsVisible = false
     
@@ -72,11 +72,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         loadInitialData()
-        //mapView.addAnnotations(bikeRacks)
- 
 
-        let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
-        mapView.addGestureRecognizer(mapTap)
+        //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
+        //mapView.addGestureRecognizer(mapTap)
         
         hamburgerView.layer.cornerRadius = 20;
         hamburgerView.layer.masksToBounds = true;
@@ -154,7 +152,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 200..<240 {
+            for i in 200..<300 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -163,7 +161,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 240..<360 {
+            for i in 300..<400 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -172,7 +170,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 360..<430 {
+            for i in 400..<480 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -181,7 +179,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 430..<480 {
+            for i in 480..<maxNum {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -189,22 +187,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 print("section 6 Done")
             }
         }
-        DispatchQueue.global(qos: .userInteractive).async {
-            for i in 480..<maxNum {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
-            }
-            DispatchQueue.main.sync {
-                self.addRoutes()
-                print("section 7 Done")
-            }
-        }
         
     }
     
     func addResults(result: JSON, i: Int){
-        
-        //bikeRoutes.removeAll()
-        
+                
         var routeType = ""
         var streetName = ""
         var startStreet = ""
@@ -296,9 +283,9 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                         polyLineRenderer.strokeColor = UIColor(red: 162/255.0, green: 99/255.0, blue: 81/255.0, alpha: 1)
                     } else {print("error \(route.streetName)    __--\(route.routeType)    \n")}
                     
-                    if route.isBold{
-                        polyLineRenderer.lineWidth = 3.0
-                    }
+//                    if route.isBold{
+//                        polyLineRenderer.lineWidth = 20.0
+//                    }
                     
                     return polyLineRenderer
 
@@ -535,24 +522,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         request.requestsAlternateRoutes = false
         request.transportType = .walking
         
-        print(lat)
-        print(long)
-        
-        print(request)
-        
         let directions = MKDirections(request: request)
         
         directions.calculate { [unowned self] response, error in
             let unwrappedResponse = response
             for route in (unwrappedResponse?.routes)! {
-                //if showPolyline {
                 self.mapView.add(route.polyline)
                 self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
-                //}
                 print("here")
                 self.distanceSmallView.text = "\(String(format: "%.1f", route.distance / 1609.34)) mi"
-                self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60 / 60))) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
-                self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60) / 60)) hr \(String(Int(route.expectedTravelTime) % 60)) min"
+                self.etaBike.text = "\(String(Int((route.expectedTravelTime / 4.0) / 60.0 / 60))) hr \(String(Int(route.expectedTravelTime / 4) % 60)) min"
+                self.etaWalk.text = "\(String(Int(route.expectedTravelTime / 60 / 60))) hr \(String(Int(route.expectedTravelTime) % 60)) min"
             }
         }
     }
@@ -727,8 +707,3 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         dvc.bikeLaneColors = self.bikeLaneColors
     }
 }
-
-
-
-
-
