@@ -146,7 +146,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 200..<240 {
+            for i in 200..<300 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -155,7 +155,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 240..<360 {
+            for i in 300..<400 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -164,7 +164,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 360..<430 {
+            for i in 400..<480 {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -173,7 +173,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         }
         DispatchQueue.global(qos: .userInteractive).async {
-            for i in 430..<480 {
+            for i in 480..<maxNum {
                 self.addResults(result: (json?.arrayValue[i])!, i: i)
             }
             DispatchQueue.main.sync {
@@ -181,22 +181,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 print("section 6 Done")
             }
         }
-        DispatchQueue.global(qos: .userInteractive).async {
-            for i in 480..<maxNum {
-                self.addResults(result: (json?.arrayValue[i])!, i: i)
-            }
-            DispatchQueue.main.sync {
-                self.addRoutes()
-                print("section 7 Done")
-            }
-        }
         
     }
     
     func addResults(result: JSON, i: Int){
-        
-        //bikeRoutes.removeAll()
-        
+                
         var routeType = ""
         var streetName = ""
         var startStreet = ""
