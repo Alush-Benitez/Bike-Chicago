@@ -72,6 +72,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         loadInitialData()
+        
+        offRoadOutlet.layer.cornerRadius = 15
+        sharedLaneOutlet.layer.cornerRadius = 15
+        cycleTrackOutlet.layer.cornerRadius = 15
+        bufferedOutlet.layer.cornerRadius = 15
+        normalButtonOutlet.layer.cornerRadius = 15
+
+
 
         //let mapTap = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
         //mapView.addGestureRecognizer(mapTap)
@@ -495,14 +503,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     @IBAction func onHamburgerTapped(_ sender: Any) {
         //if the hamburger menu is visible, then move the ubeView back to where it used to be
         if hamburgerIsVisible {
-            hamburgerView.alpha = 0.0
-            leadingConstraint.constant = -150
-            //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
+            UIView.animate(withDuration: 0.3) {
+                self.hamburgerView.alpha = 0
+            }            //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
             hamburgerIsVisible = false
         } else {
             //if the hamburger menu IS NOT visible, then move the ubeView back to its original position
-            hamburgerView.alpha = 1.0
-            leadingConstraint.constant = 0
+            UIView.animate(withDuration: 0.3) {
+                self.hamburgerView.alpha = 0.96
+            }
             //trailingC.constant = 0
             //2
             hamburgerIsVisible = true
