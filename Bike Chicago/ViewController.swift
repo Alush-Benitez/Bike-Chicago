@@ -400,6 +400,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         UIView.animate(withDuration: 0.3) {
             self.infoView.alpha = 0
         }
+        hideHamburgerWhenTappedAway()
     }
     
     @IBAction func directionsTapped(_ sender: Any) {
@@ -493,6 +494,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     
     @IBAction func onHamburgerTapped(_ sender: Any) {
+        //if the hamburger menu is visible, then move the ubeView back to where it used to be
+        if hamburgerIsVisible {
+            hamburgerView.alpha = 0.0
+            leadingConstraint.constant = -150
+            //this constant is NEGATIVE because we are moving it 150 points OUTWARD and that means -150
+            hamburgerIsVisible = false
+        } else {
+            //if the hamburger menu IS NOT visible, then move the ubeView back to its original position
+            hamburgerView.alpha = 1.0
+            leadingConstraint.constant = 0
+            //trailingC.constant = 0
+            //2
+            hamburgerIsVisible = true
+        }
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations: {
+            self.view.layoutIfNeeded()
+        }) { (animationComplete) in
+        }
+    }
+    
+    func hideHamburgerWhenTappedAway() {
         //if the hamburger menu is visible, then move the ubeView back to where it used to be
         if hamburgerIsVisible {
             hamburgerView.alpha = 0.0
