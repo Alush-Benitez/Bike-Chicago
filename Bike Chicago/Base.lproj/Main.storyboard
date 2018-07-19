@@ -223,7 +223,7 @@
                         <viewLayoutGuide key="safeArea" id="OFq-vY-UWR"/>
                     </view>
                     <navigationItem key="navigationItem" title="Bike Chicago" id="XKt-JW-8Qp">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="Menu" id="yz2-T2-M8u">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="icons8-slider-30" id="yz2-T2-M8u">
                             <connections>
                                 <action selector="onHamburgerTapped:" destination="Uwd-47-70b" id="SJ7-hA-We6"/>
                             </connections>
@@ -423,7 +423,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Menu" width="24" height="17"/>
         <image name="help" width="30" height="30"/>
+        <image name="icons8-slider-30" width="30" height="30"/>
     </resources>
 </document>

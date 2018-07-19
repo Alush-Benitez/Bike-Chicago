@@ -9,7 +9,6 @@ import UIKit
 
 class HelpViewController: UIViewController {
     
-    
     @IBOutlet weak var offRoadView: UIView!
     @IBOutlet weak var bufferedView: UIView!
     @IBOutlet weak var bikeLaneView: UIView!
@@ -24,7 +23,7 @@ class HelpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addHelpColors()
+        addHelpColors() 
         // Do any additional setup after loading the view.
     }
     
