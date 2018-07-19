@@ -80,17 +80,8 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uR-8Z-UVu">
-                                <rect key="frame" x="0.0" y="64" width="213" height="321"/>
+                                <rect key="frame" x="0.0" y="64" width="213" height="356"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Route Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYD-Z2-uDd">
-                                        <rect key="frame" x="38" y="40" width="137" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="HBi-ni-2Xs"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIL-Mr-Pww">
                                         <rect key="frame" x="25" y="116" width="126" height="30"/>
                                         <state key="normal" title="Buffered Lane"/>
@@ -99,8 +90,8 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c7L-fA-nuc">
-                                        <rect key="frame" x="63" y="162" width="50" height="30"/>
-                                        <state key="normal" title="Normal"/>
+                                        <rect key="frame" x="54.666666666666657" y="162" width="67" height="30"/>
+                                        <state key="normal" title="Bike Lane"/>
                                         <connections>
                                             <action selector="onNormalTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="mLm-aL-Ebi"/>
                                         </connections>
@@ -166,6 +157,22 @@
                                             <action selector="onCycleTrackTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="rOP-z2-oqV"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqA-iI-YQF">
+                                        <rect key="frame" x="155" y="304" width="32" height="30"/>
+                                        <state key="normal" image="help"/>
+                                        <connections>
+                                            <segue destination="Un8-ix-zyP" kind="show" id="soH-FE-FJK"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Route Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYD-Z2-uDd">
+                                        <rect key="frame" x="38" y="28" width="137" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="HBi-ni-2Xs"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -173,7 +180,8 @@
                                     <constraint firstItem="5Vy-Dc-vX7" firstAttribute="top" secondItem="XlW-xC-vqR" secondAttribute="bottom" constant="30" id="2sT-z5-Idx"/>
                                     <constraint firstItem="c7L-fA-nuc" firstAttribute="centerX" secondItem="DQQ-t9-w1l" secondAttribute="centerX" id="4lv-ru-WDk"/>
                                     <constraint firstItem="XlW-xC-vqR" firstAttribute="leading" secondItem="DQQ-t9-w1l" secondAttribute="trailing" constant="24" id="5gD-q4-7Yv"/>
-                                    <constraint firstItem="2qC-0Y-CFc" firstAttribute="top" secondItem="PYD-Z2-uDd" secondAttribute="bottom" constant="13" id="9IM-nT-SVF"/>
+                                    <constraint firstItem="aqA-iI-YQF" firstAttribute="trailing" secondItem="5Vy-Dc-vX7" secondAttribute="trailing" id="5zT-Fh-l0Y"/>
+                                    <constraint firstItem="2qC-0Y-CFc" firstAttribute="top" secondItem="PYD-Z2-uDd" secondAttribute="bottom" constant="25" id="9IM-nT-SVF"/>
                                     <constraint firstItem="2qC-0Y-CFc" firstAttribute="trailing" secondItem="pF4-We-ao1" secondAttribute="trailing" id="AZU-qu-NQ1"/>
                                     <constraint firstItem="c7L-fA-nuc" firstAttribute="centerY" secondItem="0a1-ft-x6M" secondAttribute="centerY" id="Ee6-iX-gnE"/>
                                     <constraint firstItem="c7L-fA-nuc" firstAttribute="top" secondItem="WIL-Mr-Pww" secondAttribute="bottom" constant="16" id="Htm-bx-FQw"/>
@@ -186,7 +194,7 @@
                                     <constraint firstItem="pF4-We-ao1" firstAttribute="top" secondItem="2qC-0Y-CFc" secondAttribute="bottom" constant="27" id="QQc-v4-joJ"/>
                                     <constraint firstItem="pF4-We-ao1" firstAttribute="leading" secondItem="0a1-ft-x6M" secondAttribute="leading" id="QWR-xF-k8S"/>
                                     <constraint firstItem="InB-9H-EZb" firstAttribute="top" secondItem="DQQ-t9-w1l" secondAttribute="bottom" constant="20" id="Smb-cS-fqK"/>
-                                    <constraint firstAttribute="bottom" secondItem="InB-9H-EZb" secondAttribute="bottom" constant="31" id="XkT-9n-76o"/>
+                                    <constraint firstAttribute="bottom" secondItem="InB-9H-EZb" secondAttribute="bottom" constant="66" id="XkT-9n-76o"/>
                                     <constraint firstItem="0a1-ft-x6M" firstAttribute="leading" secondItem="XlW-xC-vqR" secondAttribute="leading" id="Yp6-ak-6Ju"/>
                                     <constraint firstItem="pF4-We-ao1" firstAttribute="trailing" secondItem="0a1-ft-x6M" secondAttribute="trailing" id="a9q-Ny-DLY"/>
                                     <constraint firstItem="InB-9H-EZb" firstAttribute="centerX" secondItem="nUP-vk-SNc" secondAttribute="centerX" id="aTC-ZS-G9c"/>
@@ -197,16 +205,18 @@
                                     <constraint firstItem="WIL-Mr-Pww" firstAttribute="centerX" secondItem="c7L-fA-nuc" secondAttribute="centerX" id="mPC-QJ-Mzc"/>
                                     <constraint firstItem="WIL-Mr-Pww" firstAttribute="centerX" secondItem="nUP-vk-SNc" secondAttribute="centerX" id="qZ3-hv-5Dd"/>
                                     <constraint firstItem="XlW-xC-vqR" firstAttribute="trailing" secondItem="5Vy-Dc-vX7" secondAttribute="trailing" id="qcZ-Q7-XBw"/>
+                                    <constraint firstItem="aqA-iI-YQF" firstAttribute="leading" secondItem="5Vy-Dc-vX7" secondAttribute="leading" id="s4L-7O-DAr"/>
                                     <constraint firstItem="DQQ-t9-w1l" firstAttribute="centerX" secondItem="nUP-vk-SNc" secondAttribute="centerX" id="sBm-MJ-gNx"/>
-                                    <constraint firstItem="PYD-Z2-uDd" firstAttribute="top" secondItem="1uR-8Z-UVu" secondAttribute="top" constant="40" id="t3i-Wm-sDf"/>
+                                    <constraint firstItem="PYD-Z2-uDd" firstAttribute="top" secondItem="1uR-8Z-UVu" secondAttribute="top" constant="28" id="t3i-Wm-sDf"/>
                                     <constraint firstItem="c7L-fA-nuc" firstAttribute="centerX" secondItem="nUP-vk-SNc" secondAttribute="centerX" id="vMZ-xc-S6r"/>
+                                    <constraint firstItem="aqA-iI-YQF" firstAttribute="top" secondItem="5Vy-Dc-vX7" secondAttribute="bottom" constant="19" id="vR5-kh-REE"/>
                                     <constraint firstItem="0a1-ft-x6M" firstAttribute="trailing" secondItem="XlW-xC-vqR" secondAttribute="trailing" id="w4R-RC-IYR"/>
                                     <constraint firstItem="DQQ-t9-w1l" firstAttribute="centerY" secondItem="XlW-xC-vqR" secondAttribute="centerY" id="xaw-0H-R7h"/>
                                     <constraint firstItem="5Vy-Dc-vX7" firstAttribute="leading" secondItem="InB-9H-EZb" secondAttribute="trailing" constant="13" id="yvN-TT-xbL"/>
                                     <constraint firstAttribute="trailing" secondItem="2qC-0Y-CFc" secondAttribute="trailing" constant="26" id="yvk-jQ-KYg"/>
                                     <constraint firstItem="XlW-xC-vqR" firstAttribute="leading" secondItem="5Vy-Dc-vX7" secondAttribute="leading" id="yxP-WF-LZ3"/>
                                     <constraint firstItem="WIL-Mr-Pww" firstAttribute="top" secondItem="nUP-vk-SNc" secondAttribute="bottom" constant="17" id="zPO-Vc-0lN"/>
-                                    <constraint firstItem="nUP-vk-SNc" firstAttribute="top" secondItem="PYD-Z2-uDd" secondAttribute="bottom" constant="8" symbolic="YES" id="zpF-jw-fDE"/>
+                                    <constraint firstItem="nUP-vk-SNc" firstAttribute="top" secondItem="PYD-Z2-uDd" secondAttribute="bottom" constant="20" id="zpF-jw-fDE"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ey-L8-ImJ">
@@ -231,15 +241,6 @@
                                         <rect key="frame" x="8" y="54" width="210" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="210" id="1SJ-WG-9qt"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McCormick Boulevard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qak-j3-Ef8">
-                                        <rect key="frame" x="8" y="99" width="210" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="NQs-20-A42"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -283,6 +284,15 @@
                                             <action selector="directionsTapped:" destination="Uwd-47-70b" eventType="touchUpInside" id="Qn9-6N-lhV"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="McCormick Boulevard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qak-j3-Ef8">
+                                        <rect key="frame" x="8" y="99" width="210" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="NQs-20-A42"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -389,6 +399,144 @@
             </objects>
             <point key="canvasLocation" x="2246.376811594203" y="1523.6413043478262"/>
         </scene>
+        <!--Help View Controller-->
+        <scene sceneID="wGF-cK-ad0">
+            <objects>
+                <viewController id="Un8-ix-zyP" customClass="HelpViewController" customModule="Bike_Chicago" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yKI-Od-H9X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ifG-jf-Uxz">
+                                <rect key="frame" x="295" y="111" width="32" height="20"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgM-uU-FAU">
+                                <rect key="frame" x="295" y="345" width="32" height="20"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Yn-sG-Xaw">
+                                <rect key="frame" x="295" y="459" width="32" height="20"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ko0-Rx-QGZ">
+                                <rect key="frame" x="295" y="559" width="32" height="19"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bike Lane" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUD-vK-eyU">
+                                <rect key="frame" x="166" y="342" width="83" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shared Lane" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iUA-aF-zRq">
+                                <rect key="frame" x="154" y="456" width="107" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cycle Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Akr-Yq-spu">
+                                <rect key="frame" x="157" y="555" width="100" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buffered Lane" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tck-nO-6I9">
+                                <rect key="frame" x="147" y="223" width="120" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Off-Road" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRh-u0-k6J">
+                                <rect key="frame" x="168" y="108" width="79" height="23"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Off-road trails include any trail that is not based on a street. For instance, the Lakefront Trail is an off-road trail." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JI-96-oIo">
+                                <rect key="frame" x="56" y="130" width="303" height="96"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nry-dA-jDx">
+                                <rect key="frame" x="67" y="586" width="281" height="93"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Cycle tracks are similar to buffered lanes, but they are often paved with concrete and are like a completely separate part of the road.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shared lanes are bike lanes that cyclists share with traffic." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXi-JV-Gow">
+                                <rect key="frame" x="67" y="471" width="281" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="atl-kA-3se">
+                                <rect key="frame" x="67" y="244" width="281" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Buffered lanes run along the side of a street, but they are 'buffered,' which means that there is a physical barrier between the path and the street.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bike lanes are exactly what they sound like: bike-designated lanes on the side of the road." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljb-wr-E22">
+                                <rect key="frame" x="67" y="372" width="281" height="76"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9GU-jk-icG">
+                                <rect key="frame" x="295" y="223" width="32" height="20"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FRh-u0-k6J" firstAttribute="top" secondItem="BvK-oC-lqg" secondAttribute="top" constant="44" id="0PM-Mi-lNQ"/>
+                            <constraint firstItem="ifG-jf-Uxz" firstAttribute="trailing" secondItem="9GU-jk-icG" secondAttribute="trailing" id="5kY-6Y-zay"/>
+                            <constraint firstItem="5Yn-sG-Xaw" firstAttribute="top" secondItem="CgM-uU-FAU" secondAttribute="bottom" constant="94" id="74U-1I-qFz"/>
+                            <constraint firstItem="cUD-vK-eyU" firstAttribute="top" secondItem="Tck-nO-6I9" secondAttribute="bottom" constant="96" id="7hw-If-p5r"/>
+                            <constraint firstItem="Akr-Yq-spu" firstAttribute="centerY" secondItem="ko0-Rx-QGZ" secondAttribute="centerY" constant="-2" id="8BO-Dm-JL3"/>
+                            <constraint firstItem="iUA-aF-zRq" firstAttribute="bottom" secondItem="5Yn-sG-Xaw" secondAttribute="bottom" id="C4V-YY-aIq"/>
+                            <constraint firstItem="9GU-jk-icG" firstAttribute="leading" secondItem="CgM-uU-FAU" secondAttribute="leading" id="Duq-5v-v9Q"/>
+                            <constraint firstItem="Tck-nO-6I9" firstAttribute="centerX" secondItem="cUD-vK-eyU" secondAttribute="centerX" id="Eaa-Hm-aCw"/>
+                            <constraint firstItem="Tck-nO-6I9" firstAttribute="top" secondItem="yKI-Od-H9X" secondAttribute="top" constant="223" id="MR7-KD-Y5G"/>
+                            <constraint firstItem="9GU-jk-icG" firstAttribute="top" secondItem="yKI-Od-H9X" secondAttribute="top" constant="223" id="QO9-zB-DVK"/>
+                            <constraint firstItem="FRh-u0-k6J" firstAttribute="bottom" secondItem="ifG-jf-Uxz" secondAttribute="bottom" id="R6w-lY-zY6"/>
+                            <constraint firstItem="FRh-u0-k6J" firstAttribute="centerX" secondItem="yKI-Od-H9X" secondAttribute="centerX" id="TZ0-Cu-LME"/>
+                            <constraint firstItem="iUA-aF-zRq" firstAttribute="top" secondItem="cUD-vK-eyU" secondAttribute="bottom" constant="91" id="UeA-8D-c1t"/>
+                            <constraint firstItem="9GU-jk-icG" firstAttribute="trailing" secondItem="CgM-uU-FAU" secondAttribute="trailing" id="Wlv-8v-Kf0"/>
+                            <constraint firstItem="BvK-oC-lqg" firstAttribute="trailing" secondItem="ifG-jf-Uxz" secondAttribute="trailing" constant="87" id="XQ4-wg-hBO"/>
+                            <constraint firstItem="BvK-oC-lqg" firstAttribute="bottom" secondItem="ko0-Rx-QGZ" secondAttribute="bottom" constant="158" id="acf-PW-i2n"/>
+                            <constraint firstItem="Tck-nO-6I9" firstAttribute="bottom" secondItem="9GU-jk-icG" secondAttribute="bottom" constant="3" id="eC7-3Y-xU4"/>
+                            <constraint firstItem="5Yn-sG-Xaw" firstAttribute="trailing" secondItem="ko0-Rx-QGZ" secondAttribute="trailing" id="f2p-9m-LAl"/>
+                            <constraint firstItem="cUD-vK-eyU" firstAttribute="centerX" secondItem="iUA-aF-zRq" secondAttribute="centerX" id="gYy-FK-5fZ"/>
+                            <constraint firstItem="ifG-jf-Uxz" firstAttribute="leading" secondItem="9GU-jk-icG" secondAttribute="leading" id="gca-eU-cxo"/>
+                            <constraint firstItem="5Yn-sG-Xaw" firstAttribute="leading" secondItem="ko0-Rx-QGZ" secondAttribute="leading" id="gs6-YZ-oBd"/>
+                            <constraint firstItem="BvK-oC-lqg" firstAttribute="bottom" secondItem="Akr-Yq-spu" secondAttribute="bottom" constant="158" id="irq-Pq-T4f"/>
+                            <constraint firstItem="9GU-jk-icG" firstAttribute="leading" secondItem="Tck-nO-6I9" secondAttribute="trailing" constant="28" id="lFo-1e-NVu"/>
+                            <constraint firstItem="CgM-uU-FAU" firstAttribute="top" secondItem="9GU-jk-icG" secondAttribute="bottom" constant="102" id="lbZ-0E-gvI"/>
+                            <constraint firstItem="ifG-jf-Uxz" firstAttribute="top" secondItem="BvK-oC-lqg" secondAttribute="top" constant="47" id="pID-gu-Hsu"/>
+                            <constraint firstItem="CgM-uU-FAU" firstAttribute="trailing" secondItem="5Yn-sG-Xaw" secondAttribute="trailing" id="q7K-JY-adX"/>
+                            <constraint firstItem="CgM-uU-FAU" firstAttribute="leading" secondItem="5Yn-sG-Xaw" secondAttribute="leading" id="syp-Uo-LGB"/>
+                            <constraint firstItem="FRh-u0-k6J" firstAttribute="centerX" secondItem="Tck-nO-6I9" secondAttribute="centerX" id="w6H-4b-nmB"/>
+                            <constraint firstItem="iUA-aF-zRq" firstAttribute="centerX" secondItem="Akr-Yq-spu" secondAttribute="centerX" id="wqS-Ac-aIF"/>
+                            <constraint firstItem="cUD-vK-eyU" firstAttribute="bottom" secondItem="CgM-uU-FAU" secondAttribute="bottom" id="zFF-O7-cuX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BvK-oC-lqg"/>
+                    </view>
+                    <connections>
+                        <outlet property="bikeLaneView" destination="CgM-uU-FAU" id="5VD-bB-pKr"/>
+                        <outlet property="bufferedView" destination="9GU-jk-icG" id="Wf2-wZ-MEI"/>
+                        <outlet property="cycleTrackView" destination="ko0-Rx-QGZ" id="Ypc-CB-Vdh"/>
+                        <outlet property="offRoadView" destination="ifG-jf-Uxz" id="959-QM-xB2"/>
+                        <outlet property="sharedLaneView" destination="5Yn-sG-Xaw" id="Hga-lR-6ei"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hHz-HO-igb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3066.666666666667" y="1522.0108695652175"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Uzx-6d-fcU">
             <objects>
@@ -410,5 +558,6 @@
     </scenes>
     <resources>
         <image name="Menu" width="24" height="17"/>
+        <image name="help" width="30" height="30"/>
     </resources>
 </document>

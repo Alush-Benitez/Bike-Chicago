@@ -63,6 +63,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     var milesAndETA = [Double]()
     
+    var offRoadColors = UIColor(displayP3Red: 162/255.0, green: 99/255.0, blue: 81/255.0, alpha: 1.0)
+    var bufferedColors = UIColor(displayP3Red: 134/255.0, green: 76/255.0, blue: 188/255.0, alpha: 1.0)
+    var bikeLaneColors = UIColor(displayP3Red: 13/255.0, green: 174/255.0, blue: 230/255.0, alpha: 1.0)
+    var sharedLaneColors = UIColor(displayP3Red: 25/255.0, green: 178/255.0, blue: 54/255.0, alpha: 1.0)
+    var cycleTrackColors = UIColor(displayP3Red: 1.0, green: 59/255.0, blue: 61/255.0, alpha: 1.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadInitialData()
@@ -569,111 +575,111 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     
-//    @objc func mapTapped(_ tap: UITapGestureRecognizer) {
-//        if tap.state == .recognized/* && tap.state == .recognized*/ {
-//            // Get map coordinate from touch point
-//            let touchPt: CGPoint = tap.location(in: mapView)
-//            let coord: CLLocationCoordinate2D = mapView.convert(touchPt, toCoordinateFrom: mapView)
-//            let maxMeters: Double = meters(fromPixel: 22, at: touchPt)
-//            var nearestDistance: Float = MAXFLOAT
-//            var nearestPoly: MKPolyline? = nil
-//            // for every overlay ...
-//            for overlay: MKOverlay in mapView.overlays {
-//                // .. if MKPolyline ...
-//                if (overlay is MKPolyline) {
-//                    // ... get the distance ...
-//                    let distance: Float = Float(distanceOf(pt: MKMapPointForCoordinate(coord), toPoly: overlay as! MKPolyline))
-//                    // ... and find the nearest one
-//                    if distance < nearestDistance {
-//                        nearestDistance = distance
-//                        nearestPoly = overlay as! MKPolyline
-//
-//                    }
-//
-//                }
-//            }
-//
-//            if Double(nearestDistance) <= maxMeters {
-//                print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
-//                showInfoWhenLaneTapped(line: nearestPoly!)
-//                makeBold(routeToBold: nearestPoly!)
-//            } else {
-//                infoView.alpha = 0.0
-//            }
-//        }
-//    }
-//
-//    func distanceOf(pt: MKMapPoint, toPoly poly: MKPolyline) -> Double {
-//        var distance: Double = Double(MAXFLOAT)
-//        for n in 0..<poly.pointCount {
-//            let ptA = poly.points()[n]
-//            let ptB = poly.points()[n + 1]
-//            let xDelta: Double = ptB.x - ptA.x
-//            let yDelta: Double = ptB.y - ptA.y
-//            if xDelta == 0.0 && yDelta == 0.0 {
-//                // Points must not be equal
-//                continue
-//            }
-//            let u: Double = ((pt.x - ptA.x) * xDelta + (pt.y - ptA.y) * yDelta) / (xDelta * xDelta + yDelta * yDelta)
-//            var ptClosest: MKMapPoint
-//            if u < 0.0 {
-//                ptClosest = ptA
-//            }
-//            else if u > 1.0 {
-//                ptClosest = ptB
-//            }
-//            else {
-//                ptClosest = MKMapPointMake(ptA.x + u * xDelta, ptA.y + u * yDelta)
-//            }
-//
-//            distance = min(distance, MKMetersBetweenMapPoints(ptClosest, pt))
-//        }
-//        return distance
-//    }
-//
-//    func meters(fromPixel px: Int, at pt: CGPoint) -> Double {
-//        let ptB = CGPoint(x: pt.x + CGFloat(px), y: pt.y)
-//        let coordA: CLLocationCoordinate2D = mapView.convert(pt, toCoordinateFrom: mapView)
-//        let coordB: CLLocationCoordinate2D = mapView.convert(ptB, toCoordinateFrom: mapView)
-//        return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
-//    }
-//
-//    func makeBold(routeToBold: MKPolyline){
-//        for route in bikeRoutes{
-//            if route.isBold == true{
-//                mapView.remove(route.routeLine)
-//                route.isBold = false
-//                mapView.add(route.routeLine)
-//            }
-//            if routeToBold == (route.routeLine) {
-//                mapView.remove(routeToBold)
-//                route.isBold = true
-//                mapView.add(routeToBold)
-//                //showInfoWhenLaneTapped(line: nearestPoly!)
-//            }
-//        }
-//    }
+    @objc func mapTapped(_ tap: UITapGestureRecognizer) {
+        if tap.state == .recognized/* && tap.state == .recognized*/ {
+            // Get map coordinate from touch point
+            let touchPt: CGPoint = tap.location(in: mapView)
+            let coord: CLLocationCoordinate2D = mapView.convert(touchPt, toCoordinateFrom: mapView)
+            let maxMeters: Double = meters(fromPixel: 2, at: touchPt)
+            var nearestDistance: Float = MAXFLOAT
+            var nearestPoly: MKPolyline? = nil
+            // for every overlay ...
+            for overlay: MKOverlay in mapView.overlays {
+                // .. if MKPolyline ...
+                if (overlay is MKPolyline) {
+                    // ... get the distance ...
+                    let distance: Float = Float(distanceOf(pt: MKMapPointForCoordinate(coord), toPoly: overlay as! MKPolyline))
+                    // ... and find the nearest one
+                    if distance < nearestDistance {
+                        nearestDistance = distance
+                        nearestPoly = overlay as! MKPolyline
+                        
+                    }
+                    
+                }
+            }
+            
+            if Double(nearestDistance) <= maxMeters {
+                print("Touched poly: \(nearestPoly) distance: \(nearestDistance)")
+                showInfoWhenLaneTapped(line: nearestPoly!)
+                makeBold(routeToBold: nearestPoly!)
+            } else {
+                infoView.alpha = 0.0
+            }
+        }
+    }
     
-//    func showInfoWhenLaneTapped(line: MKPolyline) {
-//        UIView.animate(withDuration: 0.3) {
-//            self.infoView.alpha = 0.9
-//        }
-//        distanceLabel.isHidden = false
-//        directionsButton.isHidden = true
-//        toLabel.isHidden = true
-//        for route in bikeRoutes {
-//            if route.routeLine == line {
-//                //if route.streetName.first != String {
-//                    //streetLabel.text = route.streetName.lowercased()
-//                //} else {
-//                    streetLabel.text = route.streetName.capitalized
-//                //}
-//                startStreetLabel.text = route.startStreet.capitalized
-//                endStreetLabel.text = route.endStreet.capitalized
-//                distanceLabel.text = String(format: "%.2f", route.lengthInFeet/5280.0) + " mi"
-//            }
-//        }
-//    }
+    func distanceOf(pt: MKMapPoint, toPoly poly: MKPolyline) -> Double {
+        var distance: Double = Double(MAXFLOAT)
+        for n in 0..<poly.pointCount {
+            let ptA = poly.points()[n]
+            let ptB = poly.points()[n + 1]
+            let xDelta: Double = ptB.x - ptA.x
+            let yDelta: Double = ptB.y - ptA.y
+            if xDelta == 0.0 && yDelta == 0.0 {
+                // Points must not be equal
+                continue
+            }
+            let u: Double = ((pt.x - ptA.x) * xDelta + (pt.y - ptA.y) * yDelta) / (xDelta * xDelta + yDelta * yDelta)
+            var ptClosest: MKMapPoint
+            if u < 0.0 {
+                ptClosest = ptA
+            }
+            else if u > 1.0 {
+                ptClosest = ptB
+            }
+            else {
+                ptClosest = MKMapPointMake(ptA.x + u * xDelta, ptA.y + u * yDelta)
+            }
+            
+            distance = min(distance, MKMetersBetweenMapPoints(ptClosest, pt))
+        }
+        return distance
+    }
+    
+    func meters(fromPixel px: Int, at pt: CGPoint) -> Double {
+        let ptB = CGPoint(x: pt.x + CGFloat(px), y: pt.y)
+        let coordA: CLLocationCoordinate2D = mapView.convert(pt, toCoordinateFrom: mapView)
+        let coordB: CLLocationCoordinate2D = mapView.convert(ptB, toCoordinateFrom: mapView)
+        return MKMetersBetweenMapPoints(MKMapPointForCoordinate(coordA), MKMapPointForCoordinate(coordB))
+    }
+    
+    func makeBold(routeToBold: MKPolyline){
+        for route in bikeRoutes{
+            if route.isBold == true{
+                mapView.remove(route.routeLine)
+                route.isBold = false
+                mapView.add(route.routeLine)
+            }
+            if routeToBold == (route.routeLine) {
+                mapView.remove(routeToBold)
+                route.isBold = true
+                mapView.add(routeToBold)
+                //showInfoWhenLaneTapped(line: nearestPoly!)
+            }
+        }
+    }
+    
+    func showInfoWhenLaneTapped(line: MKPolyline) {
+        UIView.animate(withDuration: 0.3) {
+            self.infoView.alpha = 0.9
+        }
+        distanceLabel.isHidden = false
+        directionsButton.isHidden = true
+        toLabel.isHidden = true
+        for route in bikeRoutes {
+            if route.routeLine == line {
+                //if route.streetName.first != String {
+                    //streetLabel.text = route.streetName.lowercased()
+                //} else {
+                    streetLabel.text = route.streetName.capitalized
+                //}
+                startStreetLabel.text = route.startStreet.capitalized
+                endStreetLabel.text = route.endStreet.capitalized
+                distanceLabel.text = String(format: "%.2f", route.lengthInFeet/5280.0) + " mi"
+            }
+        }
+    }
     
     
     func loadInitialData() {
@@ -689,5 +695,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             else { return }
         let validWorks = works.compactMap { BikeRack(json: $0) }
         bikeRacks.append(contentsOf: validWorks)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dvc = segue.destination as! HelpViewController
+        dvc.offRoadColors = self.offRoadColors
+        dvc.bufferedColors = self.bufferedColors
+        dvc.sharedLaneColors = self.sharedLaneColors
+        dvc.cycleTrackColors = self.cycleTrackColors
+        dvc.bikeLaneColors = self.bikeLaneColors
     }
 }
