@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1457E7FE20F923E8008F6FE7 /* bikedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 1457E7FD20F923E8008F6FE7 /* bikedata.json */; };
 		14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAB28020F92E1C0060315F /* SwiftyJSON.swift */; };
+		14BC17172100E5E6008695C3 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC17162100E5E6008695C3 /* HelpViewController.swift */; };
 		4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */; };
 		4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */; };
 		4AC2A5D020F90C5F00A94BB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		1457E7FD20F923E8008F6FE7 /* bikedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = bikedata.json; sourceTree = "<group>"; };
 		14BAB28020F92E1C0060315F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		14BC17162100E5E6008695C3 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		4AC2A5C720F90C5F00A94BB6 /* Bike Chicago.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bike Chicago.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				4AC2A5CA20F90C5F00A94BB6 /* AppDelegate.swift */,
 				4AC2A5CE20F90C5F00A94BB6 /* Main.storyboard */,
+				14BC17162100E5E6008695C3 /* HelpViewController.swift */,
 				4AC2A5D120F90C6200A94BB6 /* Assets.xcassets */,
 				4AC2A5D320F90C6200A94BB6 /* LaunchScreen.storyboard */,
 				4AC2A5CC20F90C5F00A94BB6 /* ViewController.swift */,
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AC2A5CD20F90C5F00A94BB6 /* ViewController.swift in Sources */,
+				14BC17172100E5E6008695C3 /* HelpViewController.swift in Sources */,
 				14BAB28120F92E1D0060315F /* SwiftyJSON.swift in Sources */,
 				4AC2A5CB20F90C5F00A94BB6 /* AppDelegate.swift in Sources */,
 				4AC2A5ED20F925EA00A94BB6 /* Bike Route.swift in Sources */,

@@ -63,6 +63,12 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     var milesAndETA = [Double]()
     
+    var offRoadColors = UIColor(displayP3Red: 162/255.0, green: 99/255.0, blue: 81/255.0, alpha: 1.0)
+    var bufferedColors = UIColor(displayP3Red: 134/255.0, green: 76/255.0, blue: 188/255.0, alpha: 1.0)
+    var bikeLaneColors = UIColor(displayP3Red: 13/255.0, green: 174/255.0, blue: 230/255.0, alpha: 1.0)
+    var sharedLaneColors = UIColor(displayP3Red: 25/255.0, green: 178/255.0, blue: 54/255.0, alpha: 1.0)
+    var cycleTrackColors = UIColor(displayP3Red: 1.0, green: 59/255.0, blue: 61/255.0, alpha: 1.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadInitialData()
@@ -595,7 +601,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             // Get map coordinate from touch point
             let touchPt: CGPoint = tap.location(in: mapView)
             let coord: CLLocationCoordinate2D = mapView.convert(touchPt, toCoordinateFrom: mapView)
-            let maxMeters: Double = meters(fromPixel: 22, at: touchPt)
+            let maxMeters: Double = meters(fromPixel: 2, at: touchPt)
             var nearestDistance: Float = MAXFLOAT
             var nearestPoly: MKPolyline? = nil
             // for every overlay ...
@@ -710,6 +716,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             else { return }
         let validWorks = works.compactMap { BikeRack(json: $0) }
         bikeRacks.append(contentsOf: validWorks)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dvc = segue.destination as! HelpViewController
+        dvc.offRoadColors = self.offRoadColors
+        dvc.bufferedColors = self.bufferedColors
+        dvc.sharedLaneColors = self.sharedLaneColors
+        dvc.cycleTrackColors = self.cycleTrackColors
+        dvc.bikeLaneColors = self.bikeLaneColors
     }
 }
 
